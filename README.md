@@ -6,11 +6,11 @@ we will do **Squash Commits** so dont worry about informative local commit messa
 i want only 1 PR per step, so do all work and commit often the 
 
 Step 1:
- - [ ] Do a git pull on this repo (ikke fork, bare vanilla clone) etter på cd inn i folder 
- - [ ] Create a new branch form master and add a SLN named TerminalDungeonQuest.sln inside your 
- - [ ] Create a new console project inside the new folder, call the projety call this project DungeonGameSimulator
- - [ ] Create a new classlib project inside the new folder, call the projety call this project DungeonGameLogic
- - [ ] Create a referance to the classlib DungeonGameLogic inside the DungeonGameSimulator 
+ - [x] Do a git pull on this repo (ikke fork, bare vanilla clone) etter på cd inn i folder 
+ - [x] Create a new branch form master and add a SLN named TerminalDungeonQuest.sln inside your 
+ - [x] Create a new console project inside the new folder, call the projety call this project DungeonGameSimulator
+ - [x] Create a new classlib project inside the new folder, call the projety call this project DungeonGameLogic
+ - [x] Create a referance to the classlib DungeonGameLogic inside the DungeonGameSimulator 
 
 
 eksempel på kossen PR text skal se ut når dette er gjort 
