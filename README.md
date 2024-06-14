@@ -16,17 +16,17 @@ Step 1:
  - [x] Create a referance to the classlib DungeonGameLogic inside the DungeonGameSimulator 
 
 Step 2:
- - [ ] Create a new class in the DungeonGameLogic project named Character.
- - [ ] Add common properties that all characters (like Warrior, Mage, Rogue) might share.
+ - [x] Create a new class in the DungeonGameLogic project named Character.
+ - [x] Add common properties that all characters (like Warrior, Mage, Rogue) might share.
        Such as Name, Health, Strength, Energy, Mana, Gender(male, female), Speed, Agilty, Thac0 (https://dungeonsdragons.fandom.com/wiki/THAC0)
- - [ ] Add common function that all charcther have, like attack, walk, sleep, jump, just add them like
+ - [x] Add common function that all charcther have, like attack, walk, sleep, jump, just add them like
      `public void NameOfCommonFunction (int defaultInput)
      {
           throw new NotImplementedException();
      }` 
      for now but one for each common functinality must be added
- - [ ] Create derived classes for each character type (Warrior, Mage, Rogue) in the DungeonGameLogic project. Ensure these classes inherit from the Character base class.
- - [ ] Each class should override or extend the base class with specific properties or methods relevant to that character type (e.g., CastSpell() for Mage, becaus this is not a common so mage class needs its owne CastSpell and such)
+ - [x] Create derived classes for each character type (Warrior, Mage, Rogue) in the DungeonGameLogic project. Ensure these classes inherit from the Character base class.
+ - [x] Each class should override or extend the base class with specific properties or methods relevant to that character type (e.g., CastSpell() for Mage, becaus this is not a common so mage class needs its owne CastSpell and such)
  - [ ] Create an Enemy class with properties like Type, Health, and Damage.
  - [ ] In DungeonGameLogic, create a class named GameEngine.
  - [ ] Implement initial methods such as StartGame(), CreateCharacter(), and CreateEnemy()
