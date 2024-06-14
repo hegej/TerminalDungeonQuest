@@ -11,7 +11,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public PaladinSpecialAbility SpecialAbilityMjolnir { get; private set; }
 
 
-        public PaladinParameters(string name, string gender)
+        public PaladinParameters(string name, GenderType gender)
         {
             Name = name;
             Gender = gender;

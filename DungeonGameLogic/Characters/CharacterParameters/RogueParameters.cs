@@ -7,7 +7,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public int Agility { get; set; }
         public List<RogueSpecialAbility> Abilities { get; set; }
 
-        public RogueParameters(string name, string gender)
+        public RogueParameters(string name, GenderType gender)
         {
             Name = name;
             Gender = gender;

@@ -6,7 +6,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
     {
         public List<WarriorSpecialAbility> Abilities { get; set; }
 
-        public WarriorParameters(string name, string gender)
+        public WarriorParameters(string name, GenderType gender)
         {
             Name = name;
             Gender = gender;

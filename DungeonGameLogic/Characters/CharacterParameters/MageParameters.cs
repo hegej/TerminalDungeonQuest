@@ -10,7 +10,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public MageType Type { get; set; }
         public MageSpecialAbility SpecialAbilitySummon { get; private set; }
 
-        public MageParameters(string name, string gender, MageType type)
+        public MageParameters(string name, GenderType gender, MageType type)
         {
             Name = name;
             Gender = gender;

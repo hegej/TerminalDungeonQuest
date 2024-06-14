@@ -3,7 +3,7 @@
     public class BaseCharacterParameters
     {
         public string Name { get; set; }
-        public string Gender { get; set; }
+        public GenderType Gender { get; set; }
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Defense { get; set; }

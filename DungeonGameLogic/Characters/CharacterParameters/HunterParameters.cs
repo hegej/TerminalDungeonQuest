@@ -9,7 +9,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public HunterSpecialAbilityPet Pet { get; private set;}
         public List<HunterSpecialAbilityPet> AvailablePets { get; private set; } = new List<HunterSpecialAbilityPet>();
 
-        public HunterParameters(string name, string gender, int level, string petType)
+        public HunterParameters(string name, GenderType gender, int level, string petType)
         {
             Name = name;
             Gender = gender;
