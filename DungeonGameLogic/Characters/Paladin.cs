@@ -1,15 +1,22 @@
-﻿using DungeonGameLogic.Characters.CharacterParameters;
+﻿using DungeonGameLogic.Abilities;
+using DungeonGameLogic.Characters.CharacterParameters;
 
 namespace DungeonGameLogic.Characters
 {
 
     public class Paladin : Character
     {
-        public Paladin(PaladinParameters parameters)
-            : base(parameters.Name, parameters.Gender, parameters.Health, parameters.Strength, parameters.Defense, parameters.SpecialAbility, parameters.Speed, parameters.Level, parameters.Experience, parameters.THAC0)
+        public int Mana { get; private set; }
+        public double ManaRegen { get; private set; }
+        public List<PaladinSpellPower> Spells { get; private set; }
+        public PaladinParameters PaladinParam { get; private set; }
+
+        public Paladin(PaladinParameters paladinParam) : base(paladinParam)
         {
-            parameters.CheckLevelAndUpdateAbility();
-            SpecialAbility = parameters.SpecialAbility;
+            Mana = paladinParam.Mana;
+            ManaRegen = paladinParam.ManaRegen;
+            Spells = paladinParam.Spells;
+            PaladinParam = paladinParam;
         }
     }
 }

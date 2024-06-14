@@ -13,7 +13,7 @@ namespace DungeonGameLogic.Abilities
         Boost
     }
 
-    public class SpellPower
+    public class MageSpellPower
     {
         public string SpellName { get; private set; }
         public SpellType Type { get; private set; }
@@ -22,7 +22,7 @@ namespace DungeonGameLogic.Abilities
         public int ManaCost { get; private set; }
 
 
-        public SpellPower(string spellName, SpellType spellType, int spellLevel, int effectValue, int manaCost)
+        public MageSpellPower(string spellName, SpellType spellType, int spellLevel, int effectValue, int manaCost)
         {
             SpellName = spellName;
             Type = spellType;

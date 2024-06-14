@@ -1,6 +1,7 @@
-﻿namespace DungeonGameLogic.Characters
-{ 
+﻿using DungeonGameLogic.Characters.CharacterParameters;
 
+namespace DungeonGameLogic.Characters
+{
     public class Character
     {
         public string Name { get; set; }
@@ -8,23 +9,24 @@
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Defense { get; set; }
-        public string SpecialAbility { get; set; } //pet for hunter, stealth for rouge, heal for white mage, summon for black mage...
+        public string SpecialAbility { get; set; } //pet for hunter, stealth for rouge, heal for white mage, summon for black mage... TODO: Should this be a list of strings?
         public int Speed { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }
         public int THAC0 { get; set; }
 
-        public Character(string name, string gender, int health, int Strength, int defense, string specialAbility, int speed, int level, int experience, int thac0)
+        protected Character(BaseCharacterParameters CharacterParam)
         {
-            Name = name;
-            Gender = gender;
-            Health = health;
-            SpecialAbility = specialAbility;
-            Speed = speed;
-            Defense = defense;
-            Level = level;
-            Experience = experience;
-            THAC0 = thac0;
+            Name = CharacterParam.Name;
+            Gender = CharacterParam.Gender;
+            Health = CharacterParam.Health;
+            Strength = CharacterParam.Strength;
+            Defense = CharacterParam.Defense;
+            SpecialAbility = CharacterParam.SpecialAbility;
+            Speed = CharacterParam.Speed;
+            Level = CharacterParam.Level;
+            Experience = CharacterParam.Experience;
+            THAC0 = CharacterParam.THAC0;
         }
 
         public void Attack(Character target)

@@ -1,25 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DungeonGameLogic.Characters.CharacterParameters
 {
-    public class HunterParameters
+    public class HunterParameters : BaseCharacterParameters
     {
-        public string Name { get; set; }
-        public string Gender { get; set; }
-        public int Health { get; set; } = 90;
-        public int Speed { get; set; } = 70;
-        public int Agility { get; set; } = 80;
-        public int Strength { get; set; } = 30;
-        public int Defense { get; set; } = 20;
-        public int Level { get; set; } = 1;
-        public int Experience { get; set; } = 0;
-        public int THAC0 { get; set; } = 18;
-        public Pet Pet { get; private set; }
-        public string SpecialAbility { get; private set; }
+        public int Agility { get; private set; }
+        public Pet Pet { get; private set;}
         public List<Pet> AvailablePets { get; private set; } = new List<Pet>();
 
         public HunterParameters(string name, string gender, int level, string petType)
@@ -27,13 +12,20 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Name = name;
             Gender = gender;
             Level = level;
+            Health = 90;
+            Strength = 30;
+            Defense = 20;
+            Speed = 70;
+            Agility = 80;
+            Experience = 0;
+            THAC0 = 18;
             InitializePets();
 
             if (level >= 10)
             {
                 if (string.IsNullOrEmpty(petType))
                 {
-                    throw new ArgumentException("A pet type must be selected when the hunter reaches level 10 or higher.");
+                    throw new ArgumentException(""); //placeholder handler for no pet selected
                 }
 
                 Pet = ChoosePet(petType);
@@ -41,7 +33,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             }
             else
             {
-                Pet = new Pet("None", "No Pet", petHealth: 0, petAttack: 0);
+                Pet = new Pet("None", "No Pet", petHealth: 0, petAttack: 0); //if less then level 10 or no pet selected
                 SpecialAbility = "None";
             }
         }

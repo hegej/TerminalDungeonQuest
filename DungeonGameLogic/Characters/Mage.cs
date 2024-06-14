@@ -8,17 +8,19 @@ namespace DungeonGameLogic.Characters
         WhiteMage,
         BlackMage
     }
-        public class Mage : Character
-        {
+    public class Mage : Character
+    {
+        public int Mana { get; private set; }
         public double ManaRegen { get; private set; }
-        public List<SpellPower> Spells { get; private set; }
+        public List<MageSpellPower> Spells { get; private set; }
         public MageParameters MageParam { get; private set; }
 
-        public Mage(MageParameters mageParam)
-            : base(mageParam.Name, mageParam.Gender, mageParam.Health, mageParam.Strength, mageParam.Defense, mageParam.SpecialAbility, mageParam.Speed, mageParam.Level, mageParam.Experience, mageParam.THAC0)
+        public Mage(MageParameters mageParam) : base(mageParam)
         {
+            Mana = mageParam.Mana;
             ManaRegen = mageParam.ManaRegen;
             Spells = mageParam.Spells;
+            MageParam = mageParam;
         }
     }
 }
