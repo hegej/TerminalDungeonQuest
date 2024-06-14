@@ -1,4 +1,5 @@
-﻿using DungeonGameLogic.Characters.CharacterParameters;
+﻿using DungeonGameLogic.Abilities;
+using DungeonGameLogic.Characters.CharacterParameters;
 
 
 namespace DungeonGameLogic.Characters
@@ -6,7 +7,7 @@ namespace DungeonGameLogic.Characters
 {
     public class Hunter : Character
     {
-        public Pet Pet { get; private set; }
+        public HunterSpecialAbilityPet Pet { get; private set; }
         public HunterParameters HunterParam { get; private set; }
 
         public Hunter(HunterParameters hunterParam) : base(hunterParam)

@@ -8,21 +8,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public double ManaRegen { get; set; }
         public List<MageSpellPower> Spells { get; set; }
         public MageType Type { get; set; }
-
-        //public string Name { get; set; }
-        //public string Gender { get; set; }
-        //public int Health { get; set; } = 80;
-        //public int Mana { get; set; } = 100;  
-        //public double ManaRegen { get; set; } = 2.5;
-        //public MageType Type { get; set; }
-        //public int Level { get; set; } = 1;
-        //public int Experience { get; set; } = 0;
-        //public int Speed { get; set; } = 60;
-        //public int Strength { get; set; } = 5;
-        //public int Defense { get; set; } = 20;
-        //public string SpecialAbility { get; set; } = "Summon"; //lvl 10 ability
-        //public int THAC0 { get; set; } = 20;
-        //public List<MageSpellPower> Spells { get; private set; } = new List<MageSpellPower>();
+        public MageSpecialAbility SpecialAbilitySummon { get; private set; }
 
         public MageParameters(string name, string gender, MageType type)
         {
@@ -41,6 +27,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             ManaRegen = 2.5;
             Spells = new List<MageSpellPower>();
             InitializeSpellPower();
+            SpecialAbilitySummon = new MageSpecialAbility(type);
         }
 
         private void InitializeSpellPower()

@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DungeonGameLogic.Characters.CharacterParameters;
+using DungeonGameLogic.Abilities;
 
 namespace DungeonGameLogic.Characters
 {
-    internal class Warrior
+    public class Warrior : Character
     {
+        public List<WarriorSpecialAbility> Abilities { get; private set; }
+        public WarriorParameters WarriorParam { get; private set; }
+
+        public Warrior(WarriorParameters warriorParam)
+            : base(warriorParam)
+        {
+            Abilities = warriorParam.Abilities;
+            WarriorParam = warriorParam;
+        }
     }
 }
