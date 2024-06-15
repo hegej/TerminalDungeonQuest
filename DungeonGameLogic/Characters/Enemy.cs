@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonGameLogic.Characters.CharacterParameters
+namespace DungeonGameLogic.Characters.Enemy
 {
-    public enum GenderType
+    internal class Enemy
     {
-        Male,
-        Female
     }
 }

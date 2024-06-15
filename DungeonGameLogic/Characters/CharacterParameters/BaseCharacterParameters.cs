@@ -1,4 +1,6 @@
-﻿namespace DungeonGameLogic.Characters.CharacterParameters
+﻿using DungeonGameLogic.Enums;
+
+namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class BaseCharacterParameters
     {

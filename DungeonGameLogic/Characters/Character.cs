@@ -1,4 +1,5 @@
 ﻿using DungeonGameLogic.Characters.CharacterParameters;
+using DungeonGameLogic.Enums;
 
 namespace DungeonGameLogic.Characters
 {
