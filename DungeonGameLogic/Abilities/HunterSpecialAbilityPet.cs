@@ -1,14 +1,7 @@
-﻿
-namespace DungeonGameLogic.Abilities
-{
-    public enum PetType
-{
-    Wolf,
-    Bear,
-    Lynx,
-    Eagle
-}
+﻿using DungeonGameLogic.Enums;
 
+namespace DungeonGameLogic.Abilities
+{   
 public class HunterSpecialAbilityPet
 {
     public string Name { get; set; }

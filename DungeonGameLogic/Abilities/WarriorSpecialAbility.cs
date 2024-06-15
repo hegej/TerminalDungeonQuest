@@ -1,11 +1,7 @@
-﻿namespace DungeonGameLogic.Abilities
+﻿using DungeonGameLogic.Enums;
+
+namespace DungeonGameLogic.Abilities
 {
-    public enum WarriorAbilityType
-    {
-        PowerStrike,
-
-    }
-
     public class WarriorSpecialAbility
     {
         public string AbilityName { get; private set; }

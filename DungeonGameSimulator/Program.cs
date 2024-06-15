@@ -9,9 +9,9 @@ internal class Program
 
         gameEngine.StartGame();
 
-        var character = gameEngine.createCharacter();
-        
-        var enemy = gameEngine.CreateEnemy();
+        var character = gameEngine.CreateCharacter("Mage", "Favella", "Female", "WhiteMage");
+
+        gameEngine.CreateEnemy();
 
 
 

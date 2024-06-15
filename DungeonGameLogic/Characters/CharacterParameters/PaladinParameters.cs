@@ -1,7 +1,6 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Enums;
 
-
 namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class PaladinParameters : BaseCharacterParameters
@@ -9,13 +8,24 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public int Mana { get; set; }
         public double ManaRegen { get; set; }
         public List<PaladinSpellPower> Spells { get; set; }
-        public PaladinSpecialAbility SpecialAbilityMjolnir { get; private set; }
-
+        public List<PaladinSpecialAbility> SpecialAbilities { get; private set; }
 
         public PaladinParameters(string name, GenderType gender)
         {
             Name = name;
             Gender = gender;
+            InitializeDefaults();
+            InitializeSpellPower();
+            InitializeSpecialAbilities();
+        }
+
+        private void InitializeSpecialAbilities()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InitializeDefaults()
+        {
             Health = 120;
             Mana = 100;
             ManaRegen = 2.0;
@@ -26,10 +36,6 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Level = 1;
             Experience = 0;
             THAC0 = 16;
-            Spells = new List<PaladinSpellPower>();
-            InitializeSpellPower();
-            SpecialAbilityMjolnir = new PaladinSpecialAbility();
-
             //add AC = armorClass on all character types
         }
 
@@ -41,6 +47,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Spells.Add(new PaladinSpellPower("Divine Shield", PaladinSpellType.DivineShield, spellLevel: 4, effectValue: 20, manaCost: 40));
             Spells.Add(new PaladinSpellPower("Smite", PaladinSpellType.Smite, spellLevel: 5, effectValue: 25, manaCost: 50));
         }
+
 
         //public void CheckLevelAndUpdateAbility()
         //{

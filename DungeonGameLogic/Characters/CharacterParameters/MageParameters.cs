@@ -36,12 +36,12 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             switch (Type)
             {
                 case MageType.WhiteMage:
-                    Spells.Add(new MageSpellPower("Minor Heal", SpellType.Healing, spellLevel: 1, effectValue: 5, manaCost: 10));
-                    Spells.Add(new MageSpellPower("Tidal Wave", SpellType.Water, spellLevel: 1, effectValue: 15, manaCost: 20));
+                    Spells.Add(new MageSpellPower(SpellType.Healing, "Minor Heal", spellLevel: 1, effectValue: 5, manaCost: 10));
+                    Spells.Add(new MageSpellPower(SpellType.Healing, "Tidal Wave", spellLevel: 1, effectValue: 15, manaCost: 20));
                     break;
                 case MageType.BlackMage:
-                    Spells.Add(new MageSpellPower("Fireball", SpellType.Fire, spellLevel: 1, effectValue: 20, manaCost: 20));
-                    Spells.Add(new MageSpellPower("Earth Tremor", SpellType.Earth, spellLevel: 1, effectValue: 15, manaCost: 15));
+                    Spells.Add(new MageSpellPower(SpellType.Healing, "Fireball", spellLevel: 1, effectValue: 20, manaCost: 20));
+                    Spells.Add(new MageSpellPower(SpellType.Healing, "Earth Tremor", spellLevel: 1, effectValue: 15, manaCost: 15));
                     break;
                 default:
                     throw new ArgumentException("A valid MageType must be selected.");

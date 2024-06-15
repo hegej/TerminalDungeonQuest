@@ -1,15 +1,7 @@
-﻿
+﻿using DungeonGameLogic.Enums;
+
 namespace DungeonGameLogic.Abilities
 {
-    public enum PaladinSpellType
-    {
-        MinorHeal,
-        Heal,
-        Blessing,
-        DivineShield,
-        Smite
-    }
-
     public class PaladinSpellPower
     {
         public string SpellName { get; private set; }

@@ -1,6 +1,8 @@
 ﻿using DungeonGameLogic.Characters;
 using DungeonGameLogic.Characters.CharacterParameters;
 using DungeonGameLogic.Enums;
+using DungeonGameLogic.Abilities;
+using DungeonGameLogic.Characters.Enemy;
 
 namespace DungeonGameLogic
 {
@@ -11,7 +13,7 @@ namespace DungeonGameLogic
             Console.WriteLine("Game started!");
         }
 
-        public Character CreateCharacter(string type, string name, string gender)
+        public Character CreateCharacter(string type, string name, string gender, string specificType = null)
         {
             if (!Enum.TryParse<CharacterType>(type, out var characterType))
             {
@@ -23,21 +25,24 @@ namespace DungeonGameLogic
                 throw new ArgumentException("Invalid gender specified.");
             }
 
-            // Create character based on type
             switch (characterType)
             {
                 case CharacterType.Mage:
-                    return new Mage(new MageParameters { Name = name, Gender = genderType });
+                    if (!Enum.TryParse<MageType>(specificType, out var mageType))
+                    {
+                        throw new ArgumentException("Invalid mage type specified.");
+                    }
+                    return new Mage(new MageParameters(name, genderType, mageType));
                 case CharacterType.Warrior:
-                    return new Warrior(new WarriorParameters { Name = name, Gender = genderType });
+                    return new Warrior(new WarriorParameters(name, genderType));
                 case CharacterType.Rogue:
-                    return new Rogue(new RogueParameters { Name = name, Gender = genderType });
+                    return new Rogue(new RogueParameters(name, genderType));
                 case CharacterType.Paladin:
-                    return new Paladin(new PaladinParameters { Name = name, Gender = genderType });
+                    return new Paladin(new PaladinParameters(name, genderType));
                 case CharacterType.Hunter:
-                    return new Hunter(new HunterParameters { Name = name, Gender = genderType });
+                    return new Hunter(new HunterParameters(name, genderType));
                 default:
-                    throw new ArgumentException("Character type not supported.");
+                    throw new ArgumentException("Character not supported.");
             }
         }
 

@@ -1,13 +1,7 @@
-﻿
+﻿using DungeonGameLogic.Enums;
+
 namespace DungeonGameLogic.Abilities
 {
-    public enum AbilityType
-    {
-        Stealth,
-        Backstab,
-        Poison
-    }
-
     public class RogueSpecialAbility
     {
         public string AbilityName { get; private set; }

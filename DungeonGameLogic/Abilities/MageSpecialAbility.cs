@@ -1,18 +1,7 @@
-﻿using DungeonGameLogic.Characters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DungeonGameLogic.Enums;
 
 namespace DungeonGameLogic.Abilities
 {
-    public enum MageSpecialAbilityType
-    {
-        SummonShiva,
-        SummonBalrog
-    }
-
     public class MageSpecialAbility
     {
         public string AbilityName { get; private set; }

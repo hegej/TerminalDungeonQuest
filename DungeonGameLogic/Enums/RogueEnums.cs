@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DungeonGameLogic.Enums
 {
-    public enum MageType
+    public enum AbilityType
     {
-        WhiteMage,
-        BlackMage
+        Stealth,
+        Backstab,
+        Poison
     }
 }
