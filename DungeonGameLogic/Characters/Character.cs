@@ -5,7 +5,7 @@ namespace DungeonGameLogic.Characters
 {
     public class Character
     {
-        public string Type { get; set; }
+        public CharacterType Type { get; set; }
         public string Name { get; set; }
         public GenderType Gender { get; set; }
         public int Health { get; set; }
