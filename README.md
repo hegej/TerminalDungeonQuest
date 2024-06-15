@@ -27,7 +27,7 @@ Step 2:
      for now but one for each common functinality must be added
  - [x] Create derived classes for each character type (Warrior, Mage, Rogue) in the DungeonGameLogic project. Ensure these classes inherit from the Character base class.
  - [x] Each class should override or extend the base class with specific properties or methods relevant to that character type (e.g., CastSpell() for Mage, becaus this is not a common so mage class needs its owne CastSpell and such)
- - [ ] Create an Enemy class with properties like Type, Health, and Damage.
+ - [x] Create an Enemy class with properties like Type, Health, and Damage.
  - [ ] In DungeonGameLogic, create a class named GameEngine.
  - [ ] Implement initial methods such as StartGame(), CreateCharacter(), and CreateEnemy()
  - [ ] In DungeonGameSimulator, write code in Main() to start the game, create a character, and create a enemy.
