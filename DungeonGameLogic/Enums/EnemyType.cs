@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonGameLogic.Characters.Enemy
+namespace DungeonGameLogic.Enums
 {
-    internal class Enemy
+    public enum EnemyType
     {
+        Goblin,
+        Orc,
+        Troll,
+        Dragon
     }
 }
