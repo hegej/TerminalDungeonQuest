@@ -4,6 +4,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class BaseCharacterParameters
     {
+        public string Type { get; set; }
         public string Name { get; set; }
         public GenderType Gender { get; set; }
         public int Health { get; set; }
