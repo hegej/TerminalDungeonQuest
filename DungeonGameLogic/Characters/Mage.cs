@@ -1,13 +1,9 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Characters.CharacterParameters;
+using DungeonGameLogic.Enums;
 
 namespace DungeonGameLogic.Characters
 {
-    public enum MageType
-    {
-        WhiteMage,
-        BlackMage
-    }
     public class Mage : Character
     {
         public int Mana { get; private set; }
