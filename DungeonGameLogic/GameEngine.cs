@@ -23,6 +23,8 @@ namespace DungeonGameLogic
                 throw new ArgumentException("Invalid gender specified.");
             }
 
+            Character character;
+
             switch (characterType)
             {
                 case CharacterType.Mage:
@@ -30,23 +32,46 @@ namespace DungeonGameLogic
                     {
                         throw new ArgumentException("Invalid mage type specified.");
                     }
-                    return new Mage(new MageParameters(name, genderType, mageType));
+                    character = new Mage(new MageParameters(name, genderType, mageType));
+                    break;
                 case CharacterType.Warrior:
-                    return new Warrior(new WarriorParameters(name, genderType));
+                    character = new Warrior(new WarriorParameters(name, genderType));
+                    break;
                 case CharacterType.Rogue:
-                    return new Rogue(new RogueParameters(name, genderType));
+                    character = new Rogue(new RogueParameters(name, genderType));
+                    break;
                 case CharacterType.Paladin:
-                    return new Paladin(new PaladinParameters(name, genderType));
+                    character = new Paladin(new PaladinParameters(name, genderType));
+                    break;
                 case CharacterType.Hunter:
-                    return new Hunter(new HunterParameters(name, genderType));
+                    character = new Hunter(new HunterParameters(name, genderType));
+                    break;
                 default:
                     throw new ArgumentException("Character not supported.");
             }
+
+            PrintCharacterDetails(character);
+            return character;
+        }
+
+        private void PrintCharacterDetails(Character character)
+        {
+            Console.WriteLine($"\nCharacter created:");
+            Console.WriteLine($"Type: {character.GetType().Name}");
+            Console.WriteLine($"Name: {character.Name}");           
+            Console.WriteLine($"Health: {character.Health}");
+            Console.WriteLine($"Strength: {character.Strength}");
+            Console.WriteLine($"Defense: {character.Defense}");
+            Console.WriteLine($"Special Ability: {character.SpecialAbility.Name}");
+            Console.WriteLine($"Speed: {character.Speed}");
+            Console.WriteLine($"Level: {character.Level}");
+            Console.WriteLine($"Experience: {character.Experience}");
+            Console.WriteLine($"THAC0: {character.THAC0}");
         }
 
         public void CreateEnemy()
         {
-            Console.WriteLine("Enemy created!");
+            Console.WriteLine("\nEnemy created!");
         }
     }
 }

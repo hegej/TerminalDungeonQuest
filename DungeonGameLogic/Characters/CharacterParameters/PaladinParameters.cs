@@ -31,7 +31,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             ManaRegen = 2.0;
             Strength = 20;
             Defense = 30;
-            SpecialAbility = "Power of the Gods";
+            SpecialAbility = new SpecialAbility { Name = "Power of the Gods" };
             Speed = 50;
             Level = 1;
             Experience = 0;

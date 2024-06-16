@@ -19,7 +19,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Health = 80;
             Strength = 5;
             Defense = 10;
-            SpecialAbility = new SpecialAbilty{name = "Summon"}; //lvl 10 ability
+            SpecialAbility = new SpecialAbility { Name = "Summon" };
             Speed = 10;
             Level = 1;
             Experience = 0;

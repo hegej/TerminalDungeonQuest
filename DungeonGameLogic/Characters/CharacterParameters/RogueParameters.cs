@@ -15,7 +15,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Health = 90;
             Strength = 25;
             Defense = 10;
-            SpecialAbility = "Stealth";
+            SpecialAbility = new SpecialAbility { Name = "Stealth" };
             Speed = 70;
             Agility = 80; 
             Level = 1;

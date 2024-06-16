@@ -1,4 +1,5 @@
-﻿using DungeonGameLogic.Characters.CharacterParameters;
+﻿using DungeonGameLogic.Abilities;
+using DungeonGameLogic.Characters.CharacterParameters;
 using DungeonGameLogic.Enums;
 
 namespace DungeonGameLogic.Characters
@@ -11,7 +12,7 @@ namespace DungeonGameLogic.Characters
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Defense { get; set; }
-        public string SpecialAbility { get; set; } //pet for hunter, stealth for rouge, heal for white mage, summon for black mage... TODO: Should this be a list of strings?
+        public SpecialAbility SpecialAbility { get; set; } //pet for hunter, stealth for rouge, heal for white mage, summon for black mage... TODO: Should this be a list of strings?
         public int Speed { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }

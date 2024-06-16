@@ -14,7 +14,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Health = 150;
             Strength = 40;
             Defense = 35;
-            SpecialAbility = "None";
+            SpecialAbility = new SpecialAbility { Name = "PowerStrikes" };
             Speed = 50;
             Level = 1;
             Experience = 0;
