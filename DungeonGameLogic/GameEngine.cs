@@ -1,8 +1,6 @@
 ﻿using DungeonGameLogic.Characters;
 using DungeonGameLogic.Characters.CharacterParameters;
 using DungeonGameLogic.Enums;
-using DungeonGameLogic.Abilities;
-using DungeonGameLogic.Characters.Enemy;
 
 namespace DungeonGameLogic
 {
@@ -50,7 +48,5 @@ namespace DungeonGameLogic
         {
             Console.WriteLine("Enemy created!");
         }
-
-
     }
 }

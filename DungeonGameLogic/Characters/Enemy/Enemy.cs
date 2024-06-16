@@ -25,6 +25,5 @@ namespace DungeonGameLogic.Characters.Enemy
             Defense = defense;
             Speed = speed;
         }
-
     }
 }

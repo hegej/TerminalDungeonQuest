@@ -28,10 +28,5 @@ namespace DungeonGameLogic.Abilities
                 EffectValue = 100;
             }
         }
-
-        //public bool CanUse(int currentLevel)
-        //{
-        //    return currentLevel >= LevelRequired;
-        //}
     }
 }

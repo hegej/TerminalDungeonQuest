@@ -18,10 +18,5 @@ namespace DungeonGameLogic.Abilities
             EffectValue = effectValue;
             Cooldown = cooldown;
         }
-
-        //public bool CanUse(int currentLevel)
-        //{
-        //    return currentLevel >= LevelRequired;
-        //}
     }
 }

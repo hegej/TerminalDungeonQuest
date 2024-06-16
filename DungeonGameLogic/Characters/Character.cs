@@ -56,8 +56,5 @@ namespace DungeonGameLogic.Characters
         {
             throw new NotImplementedException();
         }
-
     }
 }
-
-

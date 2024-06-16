@@ -24,15 +24,5 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             THAC0 = 18;
             AvailablePets = HunterSpecialAbilityPet.InitializeAvailablePets();
         }
-
-        //private Pet ChoosePet(string petType)
-        //{
-        //    //logic to choose a pet
-        //    throw new ArgumentException(""); //placeholder
-        //}
-    }
-        
+    }      
 }
-
-    
-

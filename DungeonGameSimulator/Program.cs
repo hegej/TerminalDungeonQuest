@@ -12,9 +12,5 @@ internal class Program
         var character = gameEngine.CreateCharacter("Mage", "Favella", "Female", "WhiteMage");
 
         gameEngine.CreateEnemy();
-
-
-
-
     }
 }

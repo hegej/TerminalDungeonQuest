@@ -16,11 +16,8 @@ namespace DungeonGameLogic.Abilities
             Type = spellType;
             SpellName = spellName;
             SpellLevel = spellLevel;
-            EffectValue = effectValue; //damage or heal value
+            EffectValue = effectValue;
             ManaCost = manaCost;
         }
-
-        //Can add logic for increasing spell power
-
     }
 }

@@ -24,14 +24,5 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                 new WarriorSpecialAbility("Power Strike", WarriorAbilityType.PowerStrike, abilityLevel: 1, effectValue: 50, cooldown: 30)
             };
         }
-
-        //public void CheckLevelAndUpdateAbility()
-        //{
-        //    if (Level >= 10)
-        //    {
-        //        SpecialAbility = "Power Strike";
-        //        // Unlock special ability 
-        //    }
-        //}
     }
 }

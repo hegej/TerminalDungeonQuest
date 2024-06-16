@@ -63,7 +63,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             {
                 return "Summoning Balrog Fire Demon";
             }
-        } //Add logic for summoning, Shiva: "Blizzaga" with 100 damage. Balrog: "Firaga" with 100 damage. -Attack only once, 1 minute cooldown.
+        }
     }
 }
 

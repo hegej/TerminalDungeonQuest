@@ -47,14 +47,5 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Spells.Add(new PaladinSpellPower("Divine Shield", PaladinSpellType.DivineShield, spellLevel: 4, effectValue: 20, manaCost: 40));
             Spells.Add(new PaladinSpellPower("Smite", PaladinSpellType.Smite, spellLevel: 5, effectValue: 25, manaCost: 50));
         }
-
-
-        //public void CheckLevelAndUpdateAbility()
-        //{
-        //    if (Level >= 10)
-        //    {
-        //        SpecialAbility = "Mjølnir, Hammer of Thor";  // Unlock special ability
-        //    }
-        //}
     }
 }

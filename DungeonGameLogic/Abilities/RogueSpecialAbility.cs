@@ -20,10 +20,5 @@ namespace DungeonGameLogic.Abilities
             Cooldown = cooldown;
             CurrentCooldown = 0;
         }
-
-        //public bool CanUse(int currentLevel)
-        //{
-        //    return currentLevel >= LevelRequired;
-        //}
     }
 }
