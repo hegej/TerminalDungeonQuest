@@ -32,6 +32,19 @@ Step 2:
  - [x] Implement initial methods such as StartGame(), CreateCharacter(), and CreateEnemy()
  - [x] In DungeonGameSimulator, write code in Main() to start the game, create a character, and create a enemy.
 
+Step 3:
+ - [ ] Every class will need a AC (Armour class) 
+ - [ ] Create a red team (band of 4 enemyes, the enemyes shold be 1 hunter, 1 mage, 1 Paladin and 1 warrior)
+ - [ ] Create a blue team (band 4 Friendlyes with the same setup 1 hunter, 1 mage, 1 Paladin and 1 warrior)
+ - [ ] Simulate 100 battles between red and blue, dump alle action stats and full battel log in json format and add to PR when checkin.
+ - [ ] To check if hit use (((Roll D20)+Target AC) ≥ THAC0) ----> if THAC0 is higher then the role + the AC then its a hit
+ - [ ] ROLLS are a D20 so create a Random that gives between a inn 1-20...
+ - [ ] use the Speed atribute to calculate who attacks first for each step,,, each team take on turn each, so on attack then other team attacks and so on
+ - [ ] The attacker should chose a random target for now
+ - [ ] Log all actions, outcomes, and stats for each battle.
+ - [ ] Format the entire battle log in JSON for easy analysis and debugging. This log should capture detailed sequences of moves, hits, misses, and outcomes of each battle.
+ - [ ] Once implemented, all changes should be committed to your branch. Ensure the pull request includes A full battle log in JSON format.
+ 
 
 #Note: StartGAme(); should start with somthing like this 
 Console.WriteLine("Welcome to Terminal Dungeon Quest!");
