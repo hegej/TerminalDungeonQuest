@@ -5,15 +5,15 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class MageParameters : BaseCharacterParameters
     {
-        public int Level { get; private set; } = 1;
-        public int Health { get; private set; } = 80;
-        public int Strength { get; private set; } = 5;
-        public int Defense { get; private set; } = 10;
-        public int ArmorClass { get; private set; } = 10;
+        public new int Level { get; private set; } = 1;
+        public new int Health { get; private set; } = 80;
+        public new int Strength { get; private set; } = 5;
+        public new int Defense { get; private set; } = 10;
+        public new int ArmorClass { get; private set; } = 10;
         public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "Summon" };
-        public int Speed { get; private set; } = 15;
-        public int Experience { get; private set; } = 0;
-        public int THAC0 { get; private set; } = 20;
+        public new int Speed { get; private set; } = 15;
+        public new int Experience { get; private set; } = 0;
+        public new int THAC0 { get; private set; } = 20;
         public int Mana { get; private set; } = 100;
         public double ManaRegen { get; private set; } = 2.5;
         public List<MageSpellPower> Spells { get; set; } = new List<MageSpellPower>();

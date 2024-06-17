@@ -69,9 +69,40 @@ namespace DungeonGameLogic
             Console.WriteLine($"THAC0: {character.THAC0}");
         }
 
-        public void CreateEnemy()
+        public Enemy CreateEnemy(string name, EnemyType type)
         {
-            Console.WriteLine("\nEnemy created!");
+            return new Enemy(new EnemyParameters(name, type));
+        }
+
+        public Team CreateTeam(string teamName, bool isEnemy)
+        {
+            Team team = new Team(teamName);
+
+            if (isEnemy)
+            {
+                team.AddMember(CreateEnemy("Enemy Hunter", EnemyType.Hunter));
+                team.AddMember(CreateEnemy("Enemy Rogue", EnemyType.Rogue));
+                team.AddMember(CreateEnemy("Enemy Warrior", EnemyType.Warrior));
+                team.AddMember(CreateEnemy("Enemy Paladin", EnemyType.Paladin));
+            }
+            else
+            {
+                team.AddMember(CreateCharacter("Hunter", "Argon", "Male"));
+                team.AddMember(CreateCharacter("Mage", "FaLuna", "female", "WhiteMage"));
+                team.AddMember(CreateCharacter("Warrior", "Jarvis", "male"));
+                team.AddMember(CreateCharacter("Paladin", "Raona", "female"));
+            }
+
+            return team;
+        }
+
+        public void DisplayTeamMembers(Team team)
+        {
+            Console.WriteLine($"\n{team.Name} Members:");
+            foreach (var member in team.Members)
+            {
+                Console.WriteLine($"- {member.Name}, Type: {member.Type}, Health: {member.Health}");
+            }
         }
     }
 }

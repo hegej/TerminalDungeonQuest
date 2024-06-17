@@ -1,5 +1,4 @@
 ﻿
-
 namespace DungeonGameLogic.Characters
 {
     public class Team

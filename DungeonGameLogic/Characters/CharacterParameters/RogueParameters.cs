@@ -5,16 +5,16 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class RogueParameters : BaseCharacterParameters
     {
-        public int Level { get; private set; } = 1;
-        public int Health { get; private set; } = 80;
-        public int Strength { get; private set; } = 15;
-        public int Defense { get; private set; } = 10;
-        public int ArmorClass { get; private set; } = 14;
+        public new int Level { get; private set; } = 1;
+        public new int Health { get; private set; } = 80;
+        public new int Strength { get; private set; } = 15;
+        public new int Defense { get; private set; } = 10;
+        public new int ArmorClass { get; private set; } = 14;
         public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "Stealth" };
-        public int Speed { get; private set; } = 50;
+        public new int Speed { get; private set; } = 50;
         public int Agility { get; set; } = 80;
-        public int Experience { get; private set; } = 0;
-        public int THAC0 { get; private set; } = 18;
+        public new int Experience { get; private set; } = 0;
+        public new int THAC0 { get; private set; } = 18;
         public List<RogueSpecialAbility> Abilities { get; set; }
 
 
