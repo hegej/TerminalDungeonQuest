@@ -12,6 +12,7 @@ namespace DungeonGameLogic.Characters
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Defense { get; set; }
+        public int ArmorClass { get; set; }
         public SpecialAbility SpecialAbility { get; set; } //pet for hunter, stealth for rouge, heal for white mage, summon for black mage... TODO: Should this be a list of strings?
         public int Speed { get; set; }
         public int Level { get; set; }
@@ -26,6 +27,7 @@ namespace DungeonGameLogic.Characters
             Health = CharacterParam.Health;
             Strength = CharacterParam.Strength;
             Defense = CharacterParam.Defense;
+            ArmorClass = CharacterParam.ArmorClass;
             SpecialAbility = CharacterParam.SpecialAbility;
             Speed = CharacterParam.Speed;
             Level = CharacterParam.Level;
