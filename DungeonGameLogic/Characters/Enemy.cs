@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonGameLogic.Characters.Enemy
+namespace DungeonGameLogic.Characters
 {
     public class Enemy
     {
