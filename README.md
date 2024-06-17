@@ -39,12 +39,15 @@ Step 3:
  - [ ] Simulate 100 battles between red and blue, dump alle action stats and full battel log in json format and add to PR when checkin.
  - [ ] To check if hit use (((Roll D20)+Target AC) ≥ THAC0) ----> if THAC0 is higher then the role + the AC then its a hit
  - [ ] ROLLS are a D20 so create a Random that gives between a inn 1-20...
- - [ ] use the Speed atribute to calculate who attacks first for each step,,, each team take on turn each, so on attack then other team attacks and so on
+ - [ ] use the Speed atribute to calculate who attacks first for each step,,, each team take on turn each, so 1 attack then other team attacks and so on
  - [ ] The attacker should chose a random target for now
  - [ ] Log all actions, outcomes, and stats for each battle.
  - [ ] Format the entire battle log in JSON for easy analysis and debugging. This log should capture detailed sequences of moves, hits, misses, and outcomes of each battle.
  - [ ] Once implemented, all changes should be committed to your branch. Ensure the pull request includes A full battle log in JSON format.
  
+
+#Note: the Battle sim is just a for loop 0-99
+Each team figths til all memnber of opposing team has 0 in healt... 
 
 #Note: StartGAme(); should start with somthing like this 
 Console.WriteLine("Welcome to Terminal Dungeon Quest!");
