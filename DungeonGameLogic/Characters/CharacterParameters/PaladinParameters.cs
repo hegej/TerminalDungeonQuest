@@ -5,8 +5,17 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class PaladinParameters : BaseCharacterParameters
     {
-        public int Mana { get; set; }
-        public double ManaRegen { get; set; }
+        public int Level { get; private set; } = 1;
+        public int Health { get; private set; } = 120;
+        public int Strength { get; private set; } = 20;
+        public int Defense { get; private set; } = 30;
+        public int ArmorClass { get; private set; } = 18;
+        public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "Power of the Gods" };
+        public int Speed { get; private set; } = 40;
+        public int Experience { get; private set; } = 0;
+        public int THAC0 { get; private set; } = 16;
+        public int Mana { get; set; } = 100;
+        public double ManaRegen { get; set; } = 2.0;
         public List<PaladinSpellPower> Spells { get; set; }
         public List<PaladinSpecialAbility> SpecialAbilities { get; private set; }
 
@@ -14,7 +23,6 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         {
             Name = name;
             Gender = gender;
-            InitializeDefaults();
             InitializeSpellPower();
             InitializeSpecialAbilities();
         }
@@ -22,21 +30,6 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         private void InitializeSpecialAbilities()
         {
             throw new NotImplementedException();
-        }
-
-        private void InitializeDefaults()
-        {
-            Health = 120;
-            Mana = 100;
-            ManaRegen = 2.0;
-            Strength = 20;
-            Defense = 30;
-            SpecialAbility = new SpecialAbility { Name = "Power of the Gods" };
-            Speed = 50;
-            Level = 1;
-            Experience = 0;
-            THAC0 = 16;
-            //add AC = armorClass on all character types
         }
 
         private void InitializeSpellPower()
