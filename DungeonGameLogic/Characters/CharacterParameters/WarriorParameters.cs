@@ -13,7 +13,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "PowerStrikes" };
         public int Speed { get; private set; } = 20;
         public int Experience { get; private set; } = 0;
-        public int THAC0 { get; private set; } = 18;
+        public int THAC0 { get; private set; } = 16;
         public List<WarriorSpecialAbility> Abilities { get; set; }
 
         public WarriorParameters(string name, GenderType gender)

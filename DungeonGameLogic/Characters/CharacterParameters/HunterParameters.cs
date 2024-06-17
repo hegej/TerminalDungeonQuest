@@ -1,5 +1,4 @@
-﻿
-using DungeonGameLogic.Abilities;
+﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Enums;
 
 namespace DungeonGameLogic.Characters.CharacterParameters
@@ -15,8 +14,8 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public int Speed { get; private set; } = 70;
         public int Agility { get; private set; } = 80;
         public int Experience { get; private set; } = 0;
-        public int THAC0 { get; private set; } = 18; 
-        public HunterSpecialAbilityPet Pet { get; private set;}
+        public int THAC0 { get; private set; } = 18;
+        public HunterSpecialAbilityPet Pet { get; private set; } = new HunterSpecialAbilityPet("Default", PetType.Wolf); // Default value
         public List<HunterSpecialAbilityPet> AvailablePets { get; private set; } = new List<HunterSpecialAbilityPet>();
 
         public HunterParameters(string name, GenderType gender)
@@ -25,5 +24,5 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Gender = gender;
             AvailablePets = HunterSpecialAbilityPet.InitializeAvailablePets();
         }
-    }      
+    }
 }

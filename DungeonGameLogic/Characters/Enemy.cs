@@ -1,29 +1,17 @@
-﻿using DungeonGameLogic.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DungeonGameLogic.Characters.CharacterParameters;
+using DungeonGameLogic.Enums;
 
 namespace DungeonGameLogic.Characters
 {
-    public class Enemy
+    public class Enemy : Character
     {
-        public EnemyType Type { get; set; }
-        public int Health { get; set; }
-        public int Damage { get; set; }
-        public int Level { get; set; }
-        public int Defense { get; set; }
-        public int Speed { get; set; }
+        public int Mana { get; private set; }
+        public double ManaRegen { get; private set; }
+        public EnemyType EnemyType { get; private set; }
 
-        public Enemy(EnemyType type, int health, int damage, int level, int defense, int speed)
+        public Enemy(EnemyParameters parameters) : base(parameters)
         {
-            Type = type;
-            Health = health;
-            Damage = damage;
-            Level = level;
-            Defense = defense;
-            Speed = speed;
+            EnemyType = parameters.EnemyType;
         }
     }
 }

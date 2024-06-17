@@ -13,7 +13,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "Power of the Gods" };
         public int Speed { get; private set; } = 40;
         public int Experience { get; private set; } = 0;
-        public int THAC0 { get; private set; } = 16;
+        public int THAC0 { get; private set; } = 15;
         public int Mana { get; set; } = 100;
         public double ManaRegen { get; set; } = 2.0;
         public List<PaladinSpellPower> Spells { get; set; }
