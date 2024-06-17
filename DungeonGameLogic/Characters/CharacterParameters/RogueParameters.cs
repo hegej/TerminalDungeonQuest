@@ -31,8 +31,8 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Abilities = new List<RogueSpecialAbility>
             {
                 new RogueSpecialAbility("Stealth", AbilityType.Stealth, abilityLevel: 1, effectValue: 0, cooldown: 10),
-                new RogueSpecialAbility("Backstab", AbilityType.Backstab,abilityLevel: 1, effectValue: 0, cooldown: 10),
-                new RogueSpecialAbility("Poison", AbilityType.Poison, abilityLevel: 1, effectValue: 0, cooldown: 10)
+                new RogueSpecialAbility("Backstab", AbilityType.Backstab,abilityLevel: 1, effectValue: 20, cooldown: 10),
+                new RogueSpecialAbility("Poison", AbilityType.Poison, abilityLevel: 1, effectValue: 5, cooldown: 10) //dot
             };
         }
     }

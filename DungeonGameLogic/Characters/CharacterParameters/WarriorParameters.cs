@@ -7,9 +7,9 @@ namespace DungeonGameLogic.Characters.CharacterParameters
     {
         public int Level { get; private set; } = 1;
         public int Health { get; private set; } = 150;
-        public int Strength { get; private set; } = 40;
-        public int Defense { get; private set; } = 35;
-        public int ArmorClass { get; private set; } = 20;
+        public int Strength { get; private set; } = 30;
+        public int Defense { get; private set; } = 25;
+        public int ArmorClass { get; private set; } = 16;
         public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "PowerStrikes" };
         public int Speed { get; private set; } = 20;
         public int Experience { get; private set; } = 0;
@@ -21,14 +21,14 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Name = name;
             Gender = gender;
             InitializeAbilities();
-           
         }
 
         private void InitializeAbilities()
         {
             Abilities = new List<WarriorSpecialAbility>
             {
-                new WarriorSpecialAbility("Power Strike", WarriorAbilityType.PowerStrike, abilityLevel: 1, effectValue: 50, cooldown: 30)
+                new WarriorSpecialAbility("Power Strike", WarriorAbilityType.PowerStrike, abilityLevel: 1, effectValue: 50, cooldown: 30),
+                new WarriorSpecialAbility("Defensive Stance", WarriorAbilityType.DefensiveStance, abilityLevel: 1, effectValue: 20, cooldown: 60)
             };
         }
     }
