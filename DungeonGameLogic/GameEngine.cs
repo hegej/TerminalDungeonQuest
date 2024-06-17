@@ -49,7 +49,7 @@ namespace DungeonGameLogic
                 default:
                     throw new ArgumentException("Character not supported.");
             }
-
+            //TODO: Look at setting the function/methode here, then make the input be set in the Main
             PrintCharacterDetails(character);
             return character;
         }
