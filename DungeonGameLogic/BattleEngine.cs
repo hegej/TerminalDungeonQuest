@@ -42,36 +42,34 @@ namespace DungeonGameLogic
         public void ExecuteRound()
         {
             List<Character> allCharacters = _teams.SelectMany(t => t.GetAliveMembers()).ToList();
-            allCharacters.Sort((a, b) => base.speed.CompareTo(a.Speed)); 
-            var allCharacters = new List<(Character Character, Team Team)>();
 
-            foreach (var team in teams)
+            allCharacters.Sort((a, b) =>
             {
+                int initiativeComparison = a.Initiative.CompareTo(b.Initiative);
+                if (initiativeComparison != 0) return initiativeComparison;
 
-                var aliveMembers = team.Members.Where(m => m.IsAlive).ToList();
+                int speedComparison = b.Speed.CompareTo(a.Speed);
+                if (speedComparison != 0) return speedComparison;
 
-                foreach (var member in aliveMembers)
-                {
-                    allCharacters.Add((member, team));
-                }
+                Team aTeam = _teams.First(t => t.Name == a.Team);
+                Team bTeam = _teams.First(t => t.Name == b.Team);
+                return aTeam.Priority.CompareTo(bTeam.Priority);
+            });
+
+            foreach (var attacker in allCharacters)
+            {
+                if (!attacker.IsAlive) continue;
+
+                var opposingTeams = _teams.Where(t => t.Name != attacker.Team).ToList();
+                var target = ChooseRandomTarget(opposingTeams);
+
+                if (target == null) continue;
+
+                PerformAction(attacker, target);
             }
 
-            allCharacters = allCharacters.OrderBy(entry => entry.Character.Initiative).ToList();
-
-            foreach (var entry in allCharacters)
-            {
-                var opponentTeams = teams.Where(t => t != entry.Team).ToList();
-                var target = ChooseRandomTarget(opponentTeams);
-
-                if (target != null)
-                {
-                    PerformAction(entry.Character, target);
-                }
-            }
-
-            BattleLogger.Log("Round completed.");
+            _battleLog.Add("Round completed.");
         }
-
 
         private void PerformAction(Character attacker, Character target)
         {
