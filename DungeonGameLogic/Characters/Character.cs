@@ -19,8 +19,9 @@ namespace DungeonGameLogic.Characters
         public int Level { get; set; }
         public int Experience { get; set; }
         public int THAC0 { get; set; }
-        public bool IsAlive { get; set; } = true;
-       
+        public bool IsAlive { get; set; }
+        public string Team { get; set; }
+
 
         protected Character(BaseCharacterParameters CharacterParam)
         {
@@ -36,6 +37,8 @@ namespace DungeonGameLogic.Characters
             Level = CharacterParam.Level;
             Experience = CharacterParam.Experience;
             THAC0 = CharacterParam.THAC0;
+            IsAlive = true;
+            Team = string.Empty;
         }
 
         public void Attack(Character target)

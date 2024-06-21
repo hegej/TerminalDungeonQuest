@@ -26,6 +26,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Speed = 15;
             Experience = 0;
             THAC0 = 20;
+            Initiative = 31;
             InitialMana = Mana;
             InitializeSpellPower();
             //SpecialAbilitySummon = new MageSpecialAbility(type);

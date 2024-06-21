@@ -4,23 +4,32 @@ namespace DungeonGameLogic
 {
     public class BattleEngine
     {
+        private List<Team> _teams;
         private Random _random = new Random();
+        private List<string> _battleLog = new List<string>();
+
+        public BattleEngine(List<Team> teams)
+        {
+            if (teams.Count < 2)
+            {
+                throw new ArgumentException("Battle requires at least two teams.");
+            }
+            this._teams = teams;
+        }
 
         public void SimulateBattle(List<Team> teams)
         {
-            BattleLogger.Log("Battle started!");
-
-            while (teams.Any(team => team.AliveMembers()))
+            int round = 1;
+            while (_teams.Count(t => t.AliveMembers()) > 1)
             {
-                BattleLogger.Log("Executing round.");
-                ExecuteRound(teams);
-                BattleLogger.Log("Round completed.");
+                LogRoundStart(round);
+                ExecuteRound();
+                round++;
             }
-
-            var winners = teams.Where(t => t.AliveMembers()).Select(t => t.Name).ToList();
-            BattleLogger.Log("Battle finished! Winners: " + string.Join(", ", winners));
+            LoggBattleEnd();
         }
 
+        
         private Character ChooseRandomTarget(List<Team> teams)
         {
             var availableTargets = teams.SelectMany(t => t.Members.Where(m => m.IsAlive)).ToList();
@@ -30,8 +39,10 @@ namespace DungeonGameLogic
             return availableTargets[index];
         }
 
-        public void ExecuteRound(List<Team> teams)
+        public void ExecuteRound()
         {
+            List<Character> allCharacters = _teams.SelectMany(t => t.GetAliveMembers()).ToList();
+            allCharacters.Sort((a, b) => base.speed.CompareTo(a.Speed)); 
             var allCharacters = new List<(Character Character, Team Team)>();
 
             foreach (var team in teams)

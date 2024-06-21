@@ -18,7 +18,8 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Defense = 4;
             ArmorClass = 16;
             SpecialAbility = new SpecialAbility { Name = "PowerStrikes" };
-            Speed = 20;
+            Initiative = 51;
+            Speed = 12;
             Experience = 0;
             THAC0 = 18;
 

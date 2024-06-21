@@ -32,6 +32,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     Defense = 2;
                     ArmorClass = 7;
                     SpecialAbility = new SpecialAbility { Name = "Shadow Bolt" };
+                    Initiative = 30;
                     Speed = 11;
                     THAC0 = 20;
                     break;
@@ -42,6 +43,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     Defense = 2;
                     ArmorClass = 11;
                     SpecialAbility = new SpecialAbility { Name = "Summon Warg" };
+                    Initiative = 20;
                     Speed = 14;
                     THAC0 = 19;
                     break;
@@ -52,6 +54,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     Defense = 2; 
                     ArmorClass = 15;
                     SpecialAbility = new SpecialAbility { Name = "Power Strike" };
+                    Initiative = 50;
                     Speed = 9;
                     THAC0 = 17;
                     break;
@@ -62,6 +65,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     Defense = 2;
                     ArmorClass = 10;
                     SpecialAbility = new SpecialAbility { Name = "Stealth Attack" };
+                    Initiative = 10;
                     Speed = 15;
                     THAC0 = 19;
                     break;
@@ -75,6 +79,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     Defense = 2;
                     ArmorClass = 18;
                     SpecialAbility = new SpecialAbility { Name = "Tormentor" };
+                    Initiative = 40;
                     Speed = 8;
                     THAC0 = 16;
                     break;

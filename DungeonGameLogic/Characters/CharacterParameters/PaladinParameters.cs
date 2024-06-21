@@ -23,7 +23,8 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Defense = 4;
             ArmorClass = 18;
             SpecialAbility = new SpecialAbility { Name = "Power of the Gods" };
-            Speed = 40;
+            Initiative = 41;
+            Speed = 12;
             Experience = 0;
             THAC0 = 15;
 

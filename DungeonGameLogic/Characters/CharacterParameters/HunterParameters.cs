@@ -19,7 +19,8 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Defense = 4;
             ArmorClass = 12;
             SpecialAbility = new SpecialAbility { Name = "Pet" };
-            Speed = 70;
+            Initiative = 21;
+            Speed = 20;
             Experience = 0;
             THAC0 = 18;
 

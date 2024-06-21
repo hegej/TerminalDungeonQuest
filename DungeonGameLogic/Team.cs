@@ -4,6 +4,7 @@ namespace DungeonGameLogic
 {
     public class Team
     {
+        private static Random _random = new Random();
         public string Name { get; private set; }
         public List<Character> Members { get; private set; }
 
@@ -18,6 +19,7 @@ namespace DungeonGameLogic
             if (character != null)
             {
                 Members.Add(character);
+                character.Team = Name;
             }
         }
 
@@ -31,7 +33,6 @@ namespace DungeonGameLogic
             var aliveMembers = Members.Where(m => m.IsAlive).ToList();
             if (aliveMembers.Count == 0)
                 return null;
-
             int index = new Random().Next(aliveMembers.Count);
             return aliveMembers[index];
         }
@@ -39,6 +40,19 @@ namespace DungeonGameLogic
         public void RemoveMember(Character character)
         {
             Members.Remove(character);
+        }
+
+        public IEnumerable<Character> GetAliveMembers()
+        {
+            return Members.Where(m => m.IsAlive);
+        }
+
+        public void ApplyTeamEffect(Action<Character> effect)
+        {
+            foreach (var member in GetAliveMembers())
+            {
+                effect(member);
+            }
         }
     }
 }

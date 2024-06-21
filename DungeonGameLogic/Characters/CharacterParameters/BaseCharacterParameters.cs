@@ -13,6 +13,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public int Defense { get; set; }
         public int ArmorClass { get; set; }
         public SpecialAbility SpecialAbility { get; set; } = new SpecialAbility { Name = "None" };
+        public int Initiative { get; set; }
         public int Speed { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }

@@ -17,7 +17,8 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Defense = 2;
             ArmorClass = 14;
             SpecialAbility = new SpecialAbility { Name = "Stealth" };
-            Speed = 30;
+            Initiative = 11;
+            Speed = 22;
             Experience = 0;
             THAC0 = 18;
 
