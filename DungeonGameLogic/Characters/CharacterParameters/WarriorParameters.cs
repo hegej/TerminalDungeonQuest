@@ -5,21 +5,23 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class WarriorParameters : BaseCharacterParameters
     {
-        public new int Level { get; private set; } = 1;
-        public new int Health { get; private set; } = 150;
-        public new int Strength { get; private set; } = 30;
-        public new int Defense { get; private set; } = 25;
-        public new int ArmorClass { get; private set; } = 16;
-        public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "PowerStrikes" };
-        public new int Speed { get; private set; } = 20;
-        public new int Experience { get; private set; } = 0;
-        public new int THAC0 { get; private set; } = 16;
-        public List<WarriorSpecialAbility> Abilities { get; set; }
+        public List<WarriorSpecialAbility> Abilities { get; set; } = new List<WarriorSpecialAbility>();
 
         public WarriorParameters(string name, GenderType gender)
         {
             Name = name;
             Gender = gender;
+                       
+            Level = 1;
+            Health = 12;
+            Strength = 6;
+            Defense = 4;
+            ArmorClass = 16;
+            SpecialAbility = new SpecialAbility { Name = "PowerStrikes" };
+            Speed = 20;
+            Experience = 0;
+            THAC0 = 18;
+
             InitializeAbilities();
         }
 

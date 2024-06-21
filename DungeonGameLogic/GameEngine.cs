@@ -13,23 +13,27 @@ namespace DungeonGameLogic
 
         public Character CreateCharacter(string type, string name, string gender, string specificType = null)
         {
-            if (!Enum.TryParse<CharacterType>(type, out var characterType))
+            if (!Enum.TryParse<CharacterType>(type, true, out var characterType))
             {
+                Console.WriteLine($"Error: Failed to parse character type from '{type}'.");
                 throw new ArgumentException("Invalid character type specified.");
             }
 
+            Console.WriteLine($"Creating character of type {characterType} (Parsed from '{type}')");
+
             if (!Enum.TryParse<GenderType>(gender, true, out var genderType))
             {
+                Console.WriteLine($"Error: Failed to parse gender type from '{gender}'.");
                 throw new ArgumentException("Invalid gender specified.");
             }
 
             Character character;
-
             switch (characterType)
             {
                 case CharacterType.Mage:
                     if (!Enum.TryParse<MageType>(specificType, out var mageType))
                     {
+                        Console.WriteLine($"Error: Failed to parse mage type from '{specificType}'.");
                         throw new ArgumentException("Invalid mage type specified.");
                     }
                     character = new Mage(new MageParameters(name, genderType, mageType));
@@ -47,9 +51,10 @@ namespace DungeonGameLogic
                     character = new Hunter(new HunterParameters(name, genderType));
                     break;
                 default:
-                    throw new ArgumentException("Character not supported.");
+                    Console.WriteLine($"Error: Unsupported character type '{characterType}'.");
+                    throw new ArgumentException("Character type not supported.");
             }
-            //TODO: Look at setting the function/methode here, then make the input be set in the Main
+
             PrintCharacterDetails(character);
             return character;
         }
@@ -58,11 +63,11 @@ namespace DungeonGameLogic
         {
             Console.WriteLine($"\nCharacter created:");
             Console.WriteLine($"Type: {character.GetType().Name}");
-            Console.WriteLine($"Name: {character.Name}");           
+            Console.WriteLine($"Name: {character.Name}");
             Console.WriteLine($"Health: {character.Health}");
             Console.WriteLine($"Strength: {character.Strength}");
             Console.WriteLine($"Defense: {character.Defense}");
-            Console.WriteLine($"Special Ability: {character.SpecialAbility.Name}");
+            Console.WriteLine($"Special Ability: {character.SpecialAbility?.Name}");
             Console.WriteLine($"Speed: {character.Speed}");
             Console.WriteLine($"Level: {character.Level}");
             Console.WriteLine($"Experience: {character.Experience}");
@@ -88,9 +93,9 @@ namespace DungeonGameLogic
             else
             {
                 team.AddMember(CreateCharacter("Hunter", "Argon", "Male"));
-                team.AddMember(CreateCharacter("Mage", "FaLuna", "female", "WhiteMage"));
-                team.AddMember(CreateCharacter("Warrior", "Jarvis", "male"));
-                team.AddMember(CreateCharacter("Paladin", "Raona", "female"));
+                team.AddMember(CreateCharacter("Mage", "FaLuna", "Female", "WhiteMage"));
+                team.AddMember(CreateCharacter("Warrior", "Jarvis", "Male"));
+                team.AddMember(CreateCharacter("Paladin", "Raona", "Female"));
             }
 
             return team;
@@ -101,7 +106,16 @@ namespace DungeonGameLogic
             Console.WriteLine($"\n{team.Name} Members:");
             foreach (var member in team.Members)
             {
-                Console.WriteLine($"- {member.Name}, Type: {member.Type}, Health: {member.Health}");
+                Console.WriteLine($"- {member.Name}, Type: {member.GetType().Name}");
+                Console.WriteLine($"  Health: {member.Health}");
+                Console.WriteLine($"  Strength: {member.Strength}");
+                Console.WriteLine($"  Defense: {member.Defense}");
+                Console.WriteLine($"  Armor Class: {member.ArmorClass}");
+                Console.WriteLine($"  Special Ability: {member.SpecialAbility?.Name}");
+                Console.WriteLine($"  Speed: {member.Speed}");
+                Console.WriteLine($"  Level: {member.Level}");
+                Console.WriteLine($"  Experience: {member.Experience}");
+                Console.WriteLine($"  THAC0: {member.THAC0}");
             }
         }
     }

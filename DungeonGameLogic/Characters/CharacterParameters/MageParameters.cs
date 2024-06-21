@@ -5,19 +5,11 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class MageParameters : BaseCharacterParameters
     {
-        public new int Level { get; private set; } = 1;
-        public new int Health { get; private set; } = 80;
-        public new int Strength { get; private set; } = 5;
-        public new int Defense { get; private set; } = 10;
-        public new int ArmorClass { get; private set; } = 10;
-        public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "Summon" };
-        public new int Speed { get; private set; } = 15;
-        public new int Experience { get; private set; } = 0;
-        public new int THAC0 { get; private set; } = 20;
-        public int Mana { get; private set; } = 100;
-        public double ManaRegen { get; private set; } = 2.5;
+        public int Mana { get; set; } = 100;
+        public int InitialMana { get; set; }
+        public int ManaRegen { get; set; } = 3;
         public List<MageSpellPower> Spells { get; set; } = new List<MageSpellPower>();
-        public MageSpecialAbility SpecialAbilitySummon { get; private set; }
+        public MageSpecialAbility SpecialAbilitySummon { get; set; }
         public MageType Type { get; set; }
 
         public MageParameters(string name, GenderType gender, MageType type)
@@ -25,8 +17,18 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Name = name;
             Gender = gender;
             Type = type;
+            Level = 1;
+            Health = 10;
+            Strength = 4;
+            Defense = 2;
+            ArmorClass = 10;
+            SpecialAbility = new SpecialAbility { Name = "Summon" };
+            Speed = 15;
+            Experience = 0;
+            THAC0 = 20;
+            InitialMana = Mana;
             InitializeSpellPower();
-            SpecialAbilitySummon = new MageSpecialAbility(type);
+            //SpecialAbilitySummon = new MageSpecialAbility(type);
         }
 
         private void InitializeSpellPower()
@@ -35,11 +37,11 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             {
                 case MageType.WhiteMage:
                     Spells.Add(new MageSpellPower(SpellType.Healing, "Minor Heal", spellLevel: 1, effectValue: 5, manaCost: 10));
-                    Spells.Add(new MageSpellPower(SpellType.Water, "Tidal Wave", spellLevel: 1, effectValue: 15, manaCost: 20));
+                    Spells.Add(new MageSpellPower(SpellType.Water, "Tidal Wave", spellLevel: 1, effectValue: 5, manaCost: 20));
                     break;
                 case MageType.BlackMage:
-                    Spells.Add(new MageSpellPower(SpellType.Fire, "Fireball", spellLevel: 1, effectValue: 20, manaCost: 20));
-                    Spells.Add(new MageSpellPower(SpellType.Earth, "Earth Tremor", spellLevel: 1, effectValue: 15, manaCost: 15));
+                    Spells.Add(new MageSpellPower(SpellType.Fire, "Fireball", spellLevel: 1, effectValue: 5, manaCost: 20));
+                    Spells.Add(new MageSpellPower(SpellType.Earth, "Earth Tremor", spellLevel: 1, effectValue: 5, manaCost: 15));
                     break;
                 default:
                     throw new ArgumentException("A valid MageType must be selected.");

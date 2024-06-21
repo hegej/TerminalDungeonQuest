@@ -6,8 +6,9 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class EnemyParameters : BaseCharacterParameters
     {
-        public int Mana { get; private set; }
-        public double ManaRegen { get; private set; }
+        public int Mana { get; set; }
+        public int InitialMana { get; set; }
+        public int ManaRegen { get; set; }
         public EnemyType EnemyType { get; set; }
 
         public EnemyParameters(string name, EnemyType type)
@@ -23,11 +24,12 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             {
                 case EnemyType.Mage:
                     Level = 1;
-                    Health = 60; 
+                    Health = 10; 
                     Mana = 80;
-                    ManaRegen = 1.5;
-                    Strength = 8;
-                    Defense = 4;
+                    InitialMana = Mana;
+                    ManaRegen = 2;
+                    Strength = 5;
+                    Defense = 2;
                     ArmorClass = 7;
                     SpecialAbility = new SpecialAbility { Name = "Shadow Bolt" };
                     Speed = 11;
@@ -35,11 +37,9 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     break;
                 case EnemyType.Hunter:
                     Level = 1;
-                    Health = 70;
-                    Mana = 0;
-                    ManaRegen = 0.0;
-                    Strength = 18; 
-                    Defense = 13;
+                    Health = 10;
+                    Strength = 5; 
+                    Defense = 2;
                     ArmorClass = 11;
                     SpecialAbility = new SpecialAbility { Name = "Summon Warg" };
                     Speed = 14;
@@ -47,11 +47,9 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     break;
                 case EnemyType.Warrior:
                     Level = 1;
-                    Health = 100;
-                    Mana = 0;
-                    ManaRegen = 0.0;
-                    Strength = 20; 
-                    Defense = 18; 
+                    Health = 10;
+                    Strength = 5; 
+                    Defense = 2; 
                     ArmorClass = 15;
                     SpecialAbility = new SpecialAbility { Name = "Power Strike" };
                     Speed = 9;
@@ -59,11 +57,9 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     break;
                 case EnemyType.Rogue:
                     Level = 1;
-                    Health = 50;
-                    Mana = 0;
-                    ManaRegen = 0.0;
-                    Strength = 10;
-                    Defense = 8;
+                    Health = 10;
+                    Strength = 5;
+                    Defense = 2;
                     ArmorClass = 10;
                     SpecialAbility = new SpecialAbility { Name = "Stealth Attack" };
                     Speed = 15;
@@ -71,11 +67,12 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     break;
                 case EnemyType.Paladin:
                     Level = 1;
-                    Health = 85;
+                    Health = 10;
                     Mana = 80;
-                    ManaRegen = 1.0;
-                    Strength = 20;
-                    Defense = 18;
+                    InitialMana = Mana;
+                    ManaRegen = 1;
+                    Strength = 5;
+                    Defense = 2;
                     ArmorClass = 18;
                     SpecialAbility = new SpecialAbility { Name = "Tormentor" };
                     Speed = 8;

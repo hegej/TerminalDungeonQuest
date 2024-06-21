@@ -5,26 +5,31 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class PaladinParameters : BaseCharacterParameters
     {
-        public new int Level { get; private set; } = 1;
-        public new int Health { get; private set; } = 120;
-        public new int Strength { get; private set; } = 20;
-        public new int Defense { get; private set; } = 30;
-        public new int ArmorClass { get; private set; } = 18;
-        public SpecialAbility SpecialAbility { get; private set; } = new SpecialAbility { Name = "Power of the Gods" };
-        public new int Speed { get; private set; } = 40;
-        public new int Experience { get; private set; } = 0;
-        public new int THAC0 { get; private set; } = 15;
         public int Mana { get; set; } = 100;
-        public double ManaRegen { get; set; } = 2.0;
-        public List<PaladinSpellPower> Spells { get; set; }
-        public List<PaladinSpecialAbility> SpecialAbilities { get; private set; }
+        public int InitialMana { get; set; }
+        public int ManaRegen { get; set; } = 2;
+        public List<PaladinSpellPower> Spells { get; set; } = new List<PaladinSpellPower>();
+        public List<PaladinSpecialAbility> SpecialAbilities { get; set; } = new List<PaladinSpecialAbility>();
+
 
         public PaladinParameters(string name, GenderType gender)
         {
             Name = name;
             Gender = gender;
-            InitializeSpellPower();
-            InitializeSpecialAbilities();
+
+            Level = 1;
+            Health = 12;
+            Strength = 6;
+            Defense = 4;
+            ArmorClass = 18;
+            SpecialAbility = new SpecialAbility { Name = "Power of the Gods" };
+            Speed = 40;
+            Experience = 0;
+            THAC0 = 15;
+
+            InitialMana = Mana;
+           // InitializeSpellPower();
+            //InitializeSpecialAbilities();
         }
 
         private void InitializeSpecialAbilities()

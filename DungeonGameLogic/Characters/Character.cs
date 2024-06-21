@@ -8,16 +8,19 @@ namespace DungeonGameLogic.Characters
     {
         public CharacterType Type { get; set; }
         public string Name { get; set; }
-        public GenderType Gender { get; set; }
+        public GenderType Gender { get; set; } 
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Defense { get; set; }
         public int ArmorClass { get; set; }
         public SpecialAbility SpecialAbility { get; set; } //pet for hunter, stealth for rouge, heal for white mage, summon for black mage... TODO: Should this be a list of strings?
         public int Speed { get; set; }
+        public int Initiative { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }
         public int THAC0 { get; set; }
+        public bool IsAlive { get; set; } = true;
+       
 
         protected Character(BaseCharacterParameters CharacterParam)
         {
@@ -58,6 +61,6 @@ namespace DungeonGameLogic.Characters
         public void Rest()
         {
             throw new NotImplementedException();
-        }
+        } 
     }
 }

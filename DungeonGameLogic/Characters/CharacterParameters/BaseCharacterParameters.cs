@@ -17,5 +17,6 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public int Level { get; set; }
         public int Experience { get; set; }
         public int THAC0 { get; set; }
+        public bool IsAlive { get; set; } = true;
     }
 }
