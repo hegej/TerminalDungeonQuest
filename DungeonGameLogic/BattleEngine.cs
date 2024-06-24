@@ -1,4 +1,6 @@
-﻿using DungeonGameLogic.Characters;
+﻿using DungeonGameLogic.Abilities;
+using DungeonGameLogic.Characters;
+using DungeonGameLogic.Enums;
 
 namespace DungeonGameLogic
 {
@@ -29,7 +31,7 @@ namespace DungeonGameLogic
             LogBattleEnd();
         }
 
-        
+
         private Character ChooseRandomTarget(List<Team> teams)
         {
             var availableTargets = teams.SelectMany(t => t.Members.Where(m => m.IsAlive)).ToList();
@@ -65,22 +67,11 @@ namespace DungeonGameLogic
 
                 if (target == null) continue;
 
-                PerformAction(attacker, target);
+                PerformAction(attacker, target, allCharacters);
             }
 
+            RegenerateMana();
             _battleLog.Add("Round completed.");
-        }
-
-        private void PerformAction(Character attacker, Character target)
-        {
-            if (attacker is Mage mage && mage.CanCastSpell())
-            {
-                CastSpell(mage, target);
-            }
-            else
-            {
-                Attack(attacker, target);
-            }
         }
 
         private void Attack(Character attacker, Character target)
@@ -112,37 +103,116 @@ namespace DungeonGameLogic
             }
         }
 
-        private void CastSpell(Mage mage, Character target)
+        private void PerformAction(Character attacker, Character randomTarget, List<Character> allCharacters)
         {
-            var spell = mage.Spells.FirstOrDefault(s => s.ManaCost <= mage.Mana);
-            if (spell == null)
+            if (attacker is Mage mage)
             {
-                Attack(mage, target);
-                return;
+                var (spell, target) = mage.ChooseSpellAndTarget(allCharacters);
+                if (spell != null && target != null)
+                {
+                    CastSpell(mage, target, spell);
+                }
+                else
+                {
+                    Attack(mage, ChooseRandomTarget(_teams.Where(t => t.Name != mage.Team).ToList()));
+                }
             }
-
-            mage.Mana -= spell.ManaCost;
-            int roll = _random.Next(1, 21);
-            int requiredRoll = mage.THAC0 - target.ArmorClass;
-            var damage = roll >= requiredRoll ? spell.EffectValue : 0;
-            target.Health -= damage;
-
-            BattleLogger.LogAction($"{mage.Name} cast {spell.SpellName} on {target.Name}, dealing {damage} damage" + (roll >= requiredRoll ? "" : ", but missed"));
-            if (target.Health <= 0)
+            else
             {
-                target.IsAlive = false;
-                BattleLogger.Log($"{target.Name} has been defeated!");
+                Attack(attacker, ChooseRandomTarget(_teams.Where(t => t.Name != attacker.Team).ToList()));
             }
         }
 
-        private void RegenerateMana(Character character)
+        private void CastSpell(Character caster, Character target, MageSpellPower spell)
         {
-            if (character.GetType().GetProperty("ManaRegen") != null)
+            int mana = 0;
+
+            if (caster is Mage playerMage)
             {
-                dynamic characterWithManaRegen = character;
-                if (characterWithManaRegen.Mana < characterWithManaRegen.InitialMana)
+                mana = playerMage.Mana;
+            }
+
+            else if (caster is Enemy enemyMage && enemyMage.EnemyType == EnemyType.Mage)
+            {
+                mana = enemyMage.enemyParameters.Mana;
+            }
+
+            else
+            {
+                Attack(caster, target);
+                return;
+            }
+
+            if (mana < spell.ManaCost)
+            {
+                Attack(caster, target);
+                return;
+            }
+
+            if (caster is Mage mage)
+            {
+                mage.Mana -= spell.ManaCost;
+            }
+            else if (caster is Enemy enemyCaster && enemyCaster.EnemyType == EnemyType.Mage)
+            {
+                enemyCaster.enemyParameters.Mana -= spell.ManaCost;
+            }
+
+            int roll = _random.Next(1, 21);
+            int requiredRoll = caster.THAC0 - target.ArmorClass;
+
+            BattleLogger.Log($"{caster.Name} tries to cast {spell.SpellName}. Need to roll {requiredRoll} or higher to hit.\n Rolls: {roll}");
+
+            if (roll >= requiredRoll)
+            {
+                if (spell.Type == SpellType.Healing)
                 {
-                    characterWithManaRegen.Mana = Math.Min(characterWithManaRegen.Mana + (int)characterWithManaRegen.ManaRegen, characterWithManaRegen.InitialMana);
+                    int healAmount = spell.EffectValue;
+                    int oldHealth = target.Health;
+                    target.Health = Math.Min(target.MaxHealth, target.Health + healAmount);
+                    int actualHeal = target.Health - oldHealth;
+                    BattleLogger.LogAction($"{caster.Name} Cast {spell.SpellName} on {target.Name}, healing for {actualHeal}.\n {target.Name} now has {target.Health}/{target.MaxHealth} health.");
+                }
+                else
+                {
+                    int damage = spell.EffectValue;
+                    target.Health = Math.Max(0, target.Health - damage);
+                    BattleLogger.LogAction($"{caster.Name} cast {spell.SpellName} on {target.Name} dealing {damage} damage.\n {target.Name} now has {target.Health}/{target.MaxHealth} health remaining.");
+
+                }
+
+                if (target.Health <= 0)
+                {
+                    target.IsAlive = false;
+                    BattleLogger.Log($"{target.Name} has been defeated!");
+                }
+            }
+            else
+            {
+                BattleLogger.LogAction($"{caster.Name} tried to cast {spell.SpellName} on {target.Name} but missed!");
+            }
+
+            int remainingMana = (caster is Mage mageCaster) ? mageCaster.Mana :
+                                (caster is Enemy enemy && enemy.EnemyType == EnemyType.Mage) ? enemy.enemyParameters.Mana : 0;
+            BattleLogger.Log($"{caster.Name} has {remainingMana} mana remaining.");
+        }
+
+        private void RegenerateMana()
+        {
+            foreach (var team in _teams)
+            {
+                foreach (var character in team.Members)
+                {
+                    if (character is Mage mage)
+                    {
+                        mage.Mana = Math.Min(mage.Mana + mage.ManaRegen, mage.InitialMana);
+                        BattleLogger.Log($"{mage.Name} Regenerated {mage.ManaRegen} mana. Current mana: {mage.Mana}");
+                    }
+                    else if (character is Enemy enemy && enemy.EnemyType == EnemyType.Mage)
+                    {
+                        enemy.enemyParameters.Mana = Math.Min(enemy.enemyParameters.Mana + enemy.enemyParameters.ManaRegen, enemy.enemyParameters.InitialMana);
+                        BattleLogger.Log($"{enemy.Name} Regenerated {enemy.enemyParameters.ManaRegen} mana. Current mana: {enemy.enemyParameters.Mana}");
+                    }
                 }
             }
         }
@@ -154,3 +224,4 @@ namespace DungeonGameLogic
         }
     }
 }
+

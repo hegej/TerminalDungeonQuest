@@ -10,6 +10,7 @@ namespace DungeonGameLogic.Characters
         public string Name { get; set; }
         public GenderType Gender { get; set; } 
         public int Health { get; set; }
+        public int MaxHealth { get; set; }
         public int Strength { get; set; }
         public int ArmorClass { get; set; }
         public SpecialAbility SpecialAbility { get; set; } //pet for hunter, stealth for rouge, heal for white mage, summon for black mage... TODO: Should this be a list of strings?
