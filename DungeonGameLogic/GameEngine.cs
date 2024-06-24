@@ -77,7 +77,6 @@ namespace DungeonGameLogic
             Console.WriteLine($"Name: {character.Name}");
             Console.WriteLine($"Health: {character.Health}");
             Console.WriteLine($"Strength: {character.Strength}");
-            Console.WriteLine($"Defense: {character.Defense}");
             Console.WriteLine($"Special Ability: {character.SpecialAbility?.Name}");
             Console.WriteLine($"Speed: {character.Speed}");
             Console.WriteLine($"Level: {character.Level}");
@@ -130,7 +129,6 @@ namespace DungeonGameLogic
                 Console.WriteLine($"- {member.Name}, Type: {member.GetType().Name}");
                 Console.WriteLine($"  Health: {member.Health}");
                 Console.WriteLine($"  Strength: {member.Strength}");
-                Console.WriteLine($"  Defense: {member.Defense}");
                 Console.WriteLine($"  Armor Class: {member.ArmorClass}");
                 Console.WriteLine($"  Special Ability: {member.SpecialAbility?.Name}");
                 Console.WriteLine($"  Speed: {member.Speed}");

@@ -10,7 +10,6 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public GenderType Gender { get; set; }
         public int Health { get; set; }
         public int Strength { get; set; }
-        public int Defense { get; set; }
         public int ArmorClass { get; set; }
         public SpecialAbility SpecialAbility { get; set; } = new SpecialAbility { Name = "None" };
         public int Initiative { get; set; }

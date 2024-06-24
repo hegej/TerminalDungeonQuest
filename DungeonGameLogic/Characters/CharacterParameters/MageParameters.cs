@@ -20,13 +20,12 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Level = 1;
             Health = 10;
             Strength = 4;
-            Defense = 2;
             ArmorClass = 10;
             SpecialAbility = new SpecialAbility { Name = "Summon" };
             Speed = 15;
             Experience = 0;
             THAC0 = 20;
-            Initiative = 31;
+            Initiative = 14;
             InitialMana = Mana;
             InitializeSpellPower();
             //SpecialAbilitySummon = new MageSpecialAbility(type);

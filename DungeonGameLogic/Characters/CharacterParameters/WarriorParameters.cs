@@ -10,15 +10,13 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public WarriorParameters(string name, GenderType gender)
         {
             Name = name;
-            Gender = gender;
-                       
+            Gender = gender;                     
             Level = 1;
             Health = 12;
             Strength = 6;
-            Defense = 4;
-            ArmorClass = 16;
+            ArmorClass = 6;
             SpecialAbility = new SpecialAbility { Name = "PowerStrikes" };
-            Initiative = 51;
+            Initiative = 18;
             Speed = 12;
             Experience = 0;
             THAC0 = 18;

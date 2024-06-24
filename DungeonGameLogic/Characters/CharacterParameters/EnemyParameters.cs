@@ -24,26 +24,24 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             {
                 case EnemyType.Mage:
                     Level = 1;
-                    Health = 10; 
-                    Mana = 80;
+                    Health = 8; 
+                    Mana = 30;
                     InitialMana = Mana;
                     ManaRegen = 2;
                     Strength = 5;
-                    Defense = 2;
-                    ArmorClass = 7;
+                    ArmorClass = 10;
                     SpecialAbility = new SpecialAbility { Name = "Shadow Bolt" };
-                    Initiative = 30;
+                    Initiative = 15;
                     Speed = 11;
                     THAC0 = 20;
                     break;
                 case EnemyType.Hunter:
                     Level = 1;
-                    Health = 10;
+                    Health = 8;
                     Strength = 5; 
-                    Defense = 2;
-                    ArmorClass = 11;
+                    ArmorClass = 8;
                     SpecialAbility = new SpecialAbility { Name = "Summon Warg" };
-                    Initiative = 20;
+                    Initiative = 13;
                     Speed = 14;
                     THAC0 = 19;
                     break;
@@ -51,35 +49,32 @@ namespace DungeonGameLogic.Characters.CharacterParameters
                     Level = 1;
                     Health = 10;
                     Strength = 5; 
-                    Defense = 2; 
-                    ArmorClass = 15;
+                    ArmorClass = 6;
                     SpecialAbility = new SpecialAbility { Name = "Power Strike" };
-                    Initiative = 50;
+                    Initiative = 19;
                     Speed = 9;
                     THAC0 = 17;
                     break;
                 case EnemyType.Rogue:
                     Level = 1;
-                    Health = 10;
+                    Health = 8;
                     Strength = 5;
-                    Defense = 2;
-                    ArmorClass = 10;
+                    ArmorClass = 7;
                     SpecialAbility = new SpecialAbility { Name = "Stealth Attack" };
-                    Initiative = 10;
+                    Initiative = 11;
                     Speed = 15;
                     THAC0 = 19;
                     break;
                 case EnemyType.Paladin:
                     Level = 1;
                     Health = 10;
-                    Mana = 80;
+                    Mana = 8;
                     InitialMana = Mana;
                     ManaRegen = 1;
                     Strength = 5;
-                    Defense = 2;
-                    ArmorClass = 18;
+                    ArmorClass = 5;
                     SpecialAbility = new SpecialAbility { Name = "Tormentor" };
-                    Initiative = 40;
+                    Initiative = 17;
                     Speed = 8;
                     THAC0 = 16;
                     break;

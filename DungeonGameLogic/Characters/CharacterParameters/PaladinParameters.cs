@@ -16,14 +16,12 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         {
             Name = name;
             Gender = gender;
-
             Level = 1;
             Health = 12;
             Strength = 6;
-            Defense = 4;
-            ArmorClass = 18;
+            ArmorClass = 5;
             SpecialAbility = new SpecialAbility { Name = "Power of the Gods" };
-            Initiative = 41;
+            Initiative = 16;
             Speed = 12;
             Experience = 0;
             THAC0 = 15;

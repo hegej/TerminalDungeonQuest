@@ -87,14 +87,28 @@ namespace DungeonGameLogic
         {
             int attackRoll = _random.Next(1, 21);
             int requiredRollToHit = attacker.THAC0 - target.ArmorClass;
-            int damage = attackRoll >= requiredRollToHit ? Math.Max(0, attacker.Strength - target.Defense) : 0;
 
-            target.Health -= damage;
-            BattleLogger.LogAction($"{attacker.Name} attacks {target.Name} for {damage} damage" + (attackRoll >= requiredRollToHit ? "" : ", but missed"));
-            if (target.Health <= 0)
+            BattleLogger.Log($"{attacker.Name} needs to roll {requiredRollToHit} or higher to hit.\n Rolls: {attackRoll}");
+
+            if (attackRoll >= requiredRollToHit)
             {
-                target.IsAlive = false;
-                BattleLogger.Log($"{target.Name} has been defeated!");
+                int damage = Math.Max(1, _random.Next(1, attacker.Strength + 1));
+
+                int previousHealth = target.Health;
+                target.Health = Math.Max(0, target.Health - damage);
+                int lostHealth = previousHealth - target.Health;
+
+                BattleLogger.LogAction($"{attacker.Name} Hits {target.Name} for {damage} damage.\n {target.Name} has {target.Health} health remaining.");
+
+                if (target.Health <= 0)
+                {
+                    target.IsAlive = false;
+                    BattleLogger.Log($"{target.Name} is defeated!");
+                }
+            }
+            else
+            {
+                BattleLogger.LogAction($"{attacker.Name} tries to attack {target.Name} bus missed!");
             }
         }
 
