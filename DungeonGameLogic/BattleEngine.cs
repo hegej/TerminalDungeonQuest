@@ -22,11 +22,11 @@ namespace DungeonGameLogic
             int round = 1;
             while (_teams.Count(t => t.AliveMembers()) > 1)
             {
-                LogRoundStart(round);
+                BattleLogger.LogBattleRoundStart(round);
                 ExecuteRound();
                 round++;
             }
-            LoggBattleEnd();
+            LogBattleEnd();
         }
 
         
@@ -131,6 +131,12 @@ namespace DungeonGameLogic
                     characterWithManaRegen.Mana = Math.Min(characterWithManaRegen.Mana + (int)characterWithManaRegen.ManaRegen, characterWithManaRegen.InitialMana);
                 }
             }
+        }
+
+        private void LogBattleEnd()
+        {
+            var winningTeam = _teams.FirstOrDefault(t => t.AliveMembers());
+            BattleLogger.LogBattleOutcome($"Battle has ended! {winningTeam?.Name} is the winner!");
         }
     }
 }

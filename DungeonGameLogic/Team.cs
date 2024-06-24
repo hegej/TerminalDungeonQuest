@@ -6,6 +6,7 @@ namespace DungeonGameLogic
     {
         private static Random _random = new Random();
         public string Name { get; private set; }
+        public int Priority { get; set; }
         public List<Character> Members { get; private set; }
 
         public Team(string name)

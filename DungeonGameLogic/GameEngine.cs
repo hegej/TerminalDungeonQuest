@@ -6,9 +6,20 @@ namespace DungeonGameLogic
 {
     public class GameEngine
     {
+        private BattleEngine _battleEngine;
+        private List<Team> _teams;
+
+        public GameEngine()
+        {
+            _teams = new List<Team>();
+        }
+
         public void StartGame()
         {
             Console.WriteLine("Game started!");
+            CreateTeams();
+            InitializeBattleEngine();
+            SimulateBattle();
         }
 
         public Character CreateCharacter(string type, string name, string gender, string specificType = null)
@@ -79,9 +90,19 @@ namespace DungeonGameLogic
             return new Enemy(new EnemyParameters(name, type));
         }
 
+        public void CreateTeams()
+        {
+            Team playerTeam = CreateTeam("Blue Team", false);
+            Team enemyTeam = CreateTeam("Red Team", true);
+
+            _teams.Add(playerTeam);
+            _teams.Add(enemyTeam);
+        }
+
         public Team CreateTeam(string teamName, bool isEnemy)
         {
             Team team = new Team(teamName);
+            team.Priority = isEnemy ? 1 : 0;
 
             if (isEnemy)
             {
@@ -117,6 +138,16 @@ namespace DungeonGameLogic
                 Console.WriteLine($"  Experience: {member.Experience}");
                 Console.WriteLine($"  THAC0: {member.THAC0}");
             }
+        }
+
+        private void InitializeBattleEngine()
+        {
+            _battleEngine = new BattleEngine(_teams);
+        }
+
+        private void SimulateBattle()
+        {
+            _battleEngine.SimulateBattle(_teams);
         }
     }
 }
