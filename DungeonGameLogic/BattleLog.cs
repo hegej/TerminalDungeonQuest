@@ -41,7 +41,7 @@ public static class BattleLogger
         {
             Timestamp = DateTime.Now,
             Type = "LOG",
-            Message = message
+            Message = message.Replace("\n", Environment.NewLine)
         };
 
         _logs.Add(logEntry);

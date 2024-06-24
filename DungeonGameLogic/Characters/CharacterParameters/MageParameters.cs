@@ -19,7 +19,9 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             Type = type;
             Level = 1;
             Health = 10;
-            Strength = 4;
+            Mana = 20;
+            ManaRegen = 4;
+            Strength = 2;
             ArmorClass = 10;
             SpecialAbility = new SpecialAbility { Name = "Summon" };
             Speed = 15;
@@ -37,11 +39,11 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             {
                 case MageType.WhiteMage:
                     Spells.Add(new MageSpellPower(SpellType.Healing, "Minor Heal", spellLevel: 1, effectValue: 5, manaCost: 10));
-                    Spells.Add(new MageSpellPower(SpellType.Water, "Tidal Wave", spellLevel: 1, effectValue: 5, manaCost: 20));
+                    Spells.Add(new MageSpellPower(SpellType.Water, "Tidal Wave", spellLevel: 1, effectValue: 5, manaCost: 10));
                     break;
                 case MageType.BlackMage:
-                    Spells.Add(new MageSpellPower(SpellType.Fire, "Fireball", spellLevel: 1, effectValue: 5, manaCost: 20));
-                    Spells.Add(new MageSpellPower(SpellType.Earth, "Earth Tremor", spellLevel: 1, effectValue: 5, manaCost: 15));
+                    Spells.Add(new MageSpellPower(SpellType.Fire, "Fireball", spellLevel: 1, effectValue: 5, manaCost: 10));
+                    Spells.Add(new MageSpellPower(SpellType.Earth, "Earth Tremor", spellLevel: 1, effectValue: 5, manaCost: 10));
                     break;
                 default:
                     throw new ArgumentException("A valid MageType must be selected.");
