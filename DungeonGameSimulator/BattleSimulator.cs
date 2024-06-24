@@ -9,7 +9,6 @@ namespace DungeonGameSimulator
         public void RunSimulation()
         {
             var gameEngine = new GameEngine();
-            var battleEngine = new BattleEngine();
 
             for (int i = 1; i <= 1; i++)
             {
@@ -20,8 +19,9 @@ namespace DungeonGameSimulator
                     gameEngine.CreateTeam("Blue Team", isEnemy: false)
                 };
 
-                battleEngine.SimulateBattle(teams);
+                var battleEngine = new BattleEngine(teams);
 
+                battleEngine.SimulateBattle(teams);
                 BattleLogger.Log($"Simulation {i} completed.");
             }
         }  
