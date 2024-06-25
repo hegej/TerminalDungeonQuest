@@ -16,21 +16,21 @@ namespace DungeonGameSimulator
                 try
                 {
                     var teams = new List<Team>
-                {
-                    gameEngine.CreateTeam($"Red Team{i}", isEnemy: true),
-                    gameEngine.CreateTeam($"Blue Team{i}", isEnemy: false)
-                };
+                    {
+                        gameEngine.CreateTeam($"Red Team{i}", isEnemy: true),
+                        gameEngine.CreateTeam($"Blue Team{i}", isEnemy: false)
+                    };
 
                     var battleEngine = new BattleEngine(teams);
 
                     battleEngine.SimulateBattle(teams);
-                    string result = ($"Simulation {i} completed.\n Winner is: {DetermineWinner(teams)}");
+                    var result = ($"Simulation {i} completed.\n Winner is: {DetermineWinner(teams)}");
                     BattleLogger.Log(result);
                     simulationResults.Add(result);
                 }
                 catch (Exception ex)
                 {
-                    string errorMessage = $"Error in simulation {i}: {ex.Message}";
+                    var errorMessage = $"Error in simulation {i}: {ex.Message}";
                     BattleLogger.Log(errorMessage);
                     simulationResults.Add(errorMessage);
                 }
@@ -61,9 +61,9 @@ namespace DungeonGameSimulator
                 Console.WriteLine(result);
             }
 
-            int redWins = results.Count(r => r.Contains("Red Team"));
-            int blueWins = results.Count(r => r.Contains("Blue Team"));
-            int draws = results.Count - redWins - blueWins;
+            var redWins = results.Count(r => r.Contains("Red Team"));
+            var blueWins = results.Count(r => r.Contains("Blue Team"));
+            var draws = results.Count - redWins - blueWins;
 
             Console.WriteLine($"\nRed Team Wins: {redWins}");
             Console.WriteLine($"\nBlue Team Wins: {blueWins}");

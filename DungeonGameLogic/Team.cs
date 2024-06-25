@@ -34,7 +34,7 @@ namespace DungeonGameLogic
             var aliveMembers = Members.Where(m => m.IsAlive).ToList();
             if (aliveMembers.Count == 0)
                 return null;
-            int index = new Random().Next(aliveMembers.Count);
+            var index = new Random().Next(aliveMembers.Count);
             return aliveMembers[index];
         }
 

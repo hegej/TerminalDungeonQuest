@@ -80,9 +80,4 @@ public static class BattleLogger
     {
         Log($"Round {round} begins.");
     }
-
-    public static List<LogEntry> GetBattleLog()
-    {
-        return _logs;
-    }
 }

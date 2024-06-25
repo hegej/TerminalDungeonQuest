@@ -7,19 +7,10 @@ namespace DungeonGameLogic
     public class GameEngine
     {
         private BattleEngine _battleEngine;
-        private List<Team> _teams;
+        private List<Team> _teams = new List<Team>();
 
         public GameEngine()
         {
-            _teams = new List<Team>();
-        }
-
-        public void StartGame()
-        {
-            Console.WriteLine("Game started!");
-            CreateTeams();
-            InitializeBattleEngine();
-            SimulateBattle();
         }
 
         public Character CreateCharacter(string type, string name, string gender, string specificType = null)
@@ -119,23 +110,6 @@ namespace DungeonGameLogic
             }
 
             return team;
-        }
-
-        public void DisplayTeamMembers(Team team)
-        {
-            Console.WriteLine($"\n{team.Name} Members:");
-            foreach (var member in team.Members)
-            {
-                Console.WriteLine($"- {member.Name}, Type: {member.GetType().Name}");
-                Console.WriteLine($"  Health: {member.Health}");
-                Console.WriteLine($"  Strength: {member.Strength}");
-                Console.WriteLine($"  Armor Class: {member.ArmorClass}");
-                Console.WriteLine($"  Special Ability: {member.SpecialAbility?.Name}");
-                Console.WriteLine($"  Speed: {member.Speed}");
-                Console.WriteLine($"  Level: {member.Level}");
-                Console.WriteLine($"  Experience: {member.Experience}");
-                Console.WriteLine($"  THAC0: {member.THAC0}");
-            }
         }
 
         private void InitializeBattleEngine()
