@@ -10,7 +10,7 @@ namespace DungeonGameSimulator
             var gameEngine = new GameEngine();
             var simulationResults = new List<string>();
 
-            for (int i = 1; i <= numberOfSimulations; i++)
+            for (var i = 1; i <= numberOfSimulations; i++)
             {
                 BattleLogger.Log($"Simulation {i} starting.");
                 try

@@ -16,7 +16,8 @@ namespace DungeonGameLogic
             {
                 throw new ArgumentException("Battle requires at least two teams.");
             }
-            this._teams = teams;
+
+           _teams = teams;
         }
 
         public void SimulateBattle(List<Team> teams)
