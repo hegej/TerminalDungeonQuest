@@ -33,17 +33,17 @@ Step 2:
  - [x] In DungeonGameSimulator, write code in Main() to start the game, create a character, and create a enemy.
 
 Step 3:
- - [ ] Every class will need a AC (Armour class) 
- - [ ] Create a red team (band of 4 enemyes, the enemyes shold be 1 hunter, 1 mage, 1 Paladin and 1 warrior)
- - [ ] Create a blue team (band 4 Friendlyes with the same setup 1 hunter, 1 mage, 1 Paladin and 1 warrior)
- - [ ] Simulate 100 battles between red and blue, dump alle action stats and full battel log in json format and add to PR when checkin.
- - [ ] To check if hit use ----> (THAC0 − Target AC = Required Roll)
- - [ ] ROLLS are a D20 so create a Random that gives between a inn 1-20...
- - [ ] use the Speed atribute to calculate who attacks first for each step,,, each team take on turn each, so 1 attack then other team attacks and so on
- - [ ] The attacker should chose a random target for now
- - [ ] Log all actions, outcomes, and stats for each battle.
- - [ ] Format the entire battle log in JSON for easy analysis and debugging. This log should capture detailed sequences of moves, hits, misses, and outcomes of each battle.
- - [ ] Once implemented, all changes should be committed to your branch. Ensure the pull request includes A full battle log in JSON format.
+ - [x] Every class will need a AC (Armour class) 
+ - [x] Create a red team (band of 4 enemyes, the enemyes shold be 1 hunter, 1 mage, 1 Paladin and 1 warrior)
+ - [x] Create a blue team (band 4 Friendlyes with the same setup 1 hunter, 1 mage, 1 Paladin and 1 warrior)
+ - [x] Simulate 100 battles between red and blue, dump alle action stats and full battel log in json format and add to PR when checkin.
+ - [x] To check if hit use ----> (THAC0 − Target AC = Required Roll)
+ - [x] ROLLS are a D20 so create a Random that gives between a inn 1-20...
+ - [x] use the Speed atribute to calculate who attacks first for each step,,, each team take on turn each, so 1 attack then other team attacks and so on
+ - [x] The attacker should chose a random target for now
+ - [x] Log all actions, outcomes, and stats for each battle.
+ - [x] Format the entire battle log in JSON for easy analysis and debugging. This log should capture detailed sequences of moves, hits, misses, and outcomes of each battle.
+ - [x] Once implemented, all changes should be committed to your branch. Ensure the pull request includes A full battle log in JSON format.
  
 
 #Note: the Battle sim is just a for loop 0-99
