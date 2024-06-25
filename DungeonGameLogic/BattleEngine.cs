@@ -22,7 +22,7 @@ namespace DungeonGameLogic
 
         public void SimulateBattle(List<Team> teams)
         {
-            int round = 1;
+            var round = 1;
             while (_teams.Count(t => t.AliveMembers()) > 1)
             {
                 BattleLogger.LogBattleRoundStart(round);
@@ -38,7 +38,7 @@ namespace DungeonGameLogic
             var availableTargets = teams.SelectMany(t => t.Members.Where(m => m.IsAlive)).ToList();
             if (!availableTargets.Any()) return null;
 
-            int index = _random.Next(availableTargets.Count);
+            var index = _random.Next(availableTargets.Count);
             return availableTargets[index];
         }
 
@@ -48,10 +48,10 @@ namespace DungeonGameLogic
 
             allCharacters.Sort((a, b) =>
             {
-                int initiativeComparison = a.Initiative.CompareTo(b.Initiative);
+                var initiativeComparison = a.Initiative.CompareTo(b.Initiative);
                 if (initiativeComparison != 0) return initiativeComparison;
 
-                int speedComparison = b.Speed.CompareTo(a.Speed);
+                var speedComparison = b.Speed.CompareTo(a.Speed);
                 if (speedComparison != 0) return speedComparison;
 
                 Team aTeam = _teams.First(t => t.Name == a.Team);
@@ -77,18 +77,17 @@ namespace DungeonGameLogic
 
         private void Attack(Character attacker, Character target)
         {
-            int attackRoll = _random.Next(1, 21);
-            int requiredRollToHit = attacker.THAC0 - target.ArmorClass;
+            var attackRoll = _random.Next(1, 21);
+            var requiredRollToHit = attacker.THAC0 - target.ArmorClass;
 
             BattleLogger.Log($"{attacker.Name} needs to roll {requiredRollToHit} or higher to hit.\n Rolls: {attackRoll}");
 
             if (attackRoll >= requiredRollToHit)
             {
-                int damage = Math.Max(1, _random.Next(1, attacker.Strength + 1));
+                var damage = Math.Max(1, _random.Next(1, attacker.Strength + 1));
 
-                int previousHealth = target.Health;
+                var previousHealth = target.Health;
                 target.Health = Math.Max(0, target.Health - damage);
-                int lostHealth = previousHealth - target.Health;
 
                 BattleLogger.LogAction($"{attacker.Name} Hits {target.Name} for {damage} damage.\n {target.Name} has {target.Health} health remaining.");
 
@@ -126,7 +125,7 @@ namespace DungeonGameLogic
 
         private void CastSpell(Character caster, Character target, MageSpellPower spell)
         {
-            int mana = 0;
+            var mana = 0;
 
             if (caster is Mage playerMage)
             {
@@ -159,8 +158,8 @@ namespace DungeonGameLogic
                 enemyCaster.enemyParameters.Mana -= spell.ManaCost;
             }
 
-            int roll = _random.Next(1, 21);
-            int requiredRoll = caster.THAC0 - target.ArmorClass;
+            var roll = _random.Next(1, 21);
+            var requiredRoll = caster.THAC0 - target.ArmorClass;
 
             BattleLogger.Log($"{caster.Name} tries to cast {spell.SpellName}. Need to roll {requiredRoll} or higher to hit.\n Rolls: {roll}");
 
@@ -168,15 +167,15 @@ namespace DungeonGameLogic
             {
                 if (spell.Type == SpellType.Healing)
                 {
-                    int healAmount = spell.EffectValue;
-                    int oldHealth = target.Health;
+                    var healAmount = spell.EffectValue;
+                    var oldHealth = target.Health;
                     target.Health = Math.Min(target.MaxHealth, target.Health + healAmount);
-                    int actualHeal = target.Health - oldHealth;
+                    var actualHeal = target.Health - oldHealth;
                     BattleLogger.LogAction($"{caster.Name} Cast {spell.SpellName} on {target.Name}, healing for {actualHeal}.\n {target.Name} now has {target.Health}/{target.MaxHealth} health.");
                 }
                 else
                 {
-                    int damage = spell.EffectValue;
+                    var damage = spell.EffectValue;
                     target.Health = Math.Max(0, target.Health - damage);
                     BattleLogger.LogAction($"{caster.Name} cast {spell.SpellName} on {target.Name} dealing {damage} damage.\n {target.Name} now has {target.Health}/{target.MaxHealth} health remaining.");
 
@@ -193,7 +192,7 @@ namespace DungeonGameLogic
                 BattleLogger.LogAction($"{caster.Name} tried to cast {spell.SpellName} on {target.Name} but missed!");
             }
 
-            int remainingMana = (caster is Mage mageCaster) ? mageCaster.Mana :
+            var remainingMana = (caster is Mage mageCaster) ? mageCaster.Mana :
                                 (caster is Enemy enemy && enemy.EnemyType == EnemyType.Mage) ? enemy.enemyParameters.Mana : 0;
             BattleLogger.Log($"{caster.Name} has {remainingMana} mana remaining.");
         }

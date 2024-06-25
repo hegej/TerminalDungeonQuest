@@ -63,7 +63,7 @@ public static class BattleLogger
     private static void WriteLogsToFile()
     {
         var jsonFormatOptions = new JsonSerializerOptions { WriteIndented = true };
-        string jsonString = JsonSerializer.Serialize(_logs, jsonFormatOptions);
+        var jsonString = JsonSerializer.Serialize(_logs, jsonFormatOptions);
         File.WriteAllText(_logFilePath, jsonString);
     }
 
