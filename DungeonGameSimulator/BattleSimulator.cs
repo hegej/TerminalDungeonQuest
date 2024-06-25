@@ -58,7 +58,7 @@ namespace DungeonGameSimulator
             Console.WriteLine("\nSimulation Results:");
             foreach (var result in results)
             {
-                Console.WriteLine(results);
+                Console.WriteLine(result);
             }
 
             int redWins = results.Count(r => r.Contains("Red Team"));
