@@ -6,8 +6,8 @@ namespace DungeonGameLogic.Characters
 {
     public class Rogue : Character
     {
-        public List<RogueSpecialAbility> Abilities { get; private set; }
-        public RogueParameters RogueParam { get; private set; }
+        public List<RogueSpecialAbility> Abilities { get; set; }
+        public RogueParameters RogueParam { get; set; }
 
         public Rogue(RogueParameters rogueParam)
             : base(rogueParam)

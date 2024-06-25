@@ -5,8 +5,8 @@ namespace DungeonGameLogic.Characters
 {
     public class Warrior : Character
     {
-        public List<WarriorSpecialAbility> Abilities { get; private set; }
-        public WarriorParameters WarriorParam { get; private set; }
+        public List<WarriorSpecialAbility> Abilities { get; set; }
+        public WarriorParameters WarriorParam { get; set; }
 
         public Warrior(WarriorParameters warriorParam)
             : base(warriorParam)
