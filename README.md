@@ -81,12 +81,12 @@ Step 4:
     }
     ```
 
-- [ ] **Improve Combat Randomness:**
-- [ ] Balance adjustments:
-- [ ] Ensure each character class has balanced attributes.
-- [ ] Randomize initial attributes within a certain range to add variability.
-- [ ] Introduce higher randomness in attack outcomes.
-- [ ] Implement critical hits with extra damage:
+ - [ ] **Improve Combat Randomness:**
+ - [ ] Balance adjustments:
+ - [ ] Ensure each character class has balanced attributes.
+ - [ ] Randomize initial attributes within a certain range to add variability.
+ - [ ] Introduce higher randomness in attack outcomes.
+ - [ ] Implement critical hits with extra damage:
     ```csharp
     public int CalculateDamage(Character attacker, Character defender)
     {
@@ -105,8 +105,8 @@ Step 4:
     }
     ```
 
-- [ ] **Simulate Fairer Battles:**
-- [ ] Randomize character attributes during creation:
+ - [ ] **Simulate Fairer Battles:**
+ - [ ] Randomize character attributes during creation:
     ```csharp
     public void CreateCharacter(string type)
     {
@@ -125,9 +125,9 @@ Step 4:
         // Repeat for other classes...
     }
     ```
-- [ ] Ensure balanced team creation with similar variability.
-- [ ] **Update Battle Simulation:**
-- [ ] Implement turn-based random target selection:
+ - [ ] Ensure balanced team creation with similar variability.
+ - [ ] **Update Battle Simulation:**
+ - [ ] Implement turn-based random target selection:
     ```csharp
     public void SimulateBattle()
     {
