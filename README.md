@@ -47,17 +47,17 @@ Step 3:
  
 Step 4:
  - [ ] **Enhance Logging System:**
-  - [ ] Add a option when starting sim for slow or fast,,, if slow 1 action ever 0.5 sec. fast 1 action ever 0.1 sec
-  - [ ] Use ANSI escape codes for color-coded output:
-    - [ ] Red for enemy actions.
-    - [ ] Blue for friendly actions.
-    - [ ] Yellow for critical hits or special events.
-  - [ ] Implement Unicode symbols for actions:
-    - [ ] ⚔️ for attacks.
-    - [ ] 💀 for character deaths.
-    - [ ] 🛡️ for defense actions.
-    - [ ] 🧙‍♂️ for spell casting.
-  - [ ] Implement logging method in `GameEngine`:
+ - [ ] Add a option when starting sim for slow or fast,,, if slow 1 action ever 0.5 sec. fast 1 action ever 0.1 sec
+ - [ ] Use ANSI escape codes for color-coded output:
+ - [ ] Red for enemy actions.
+ - [ ] Blue for friendly actions.
+ - [ ] Yellow for critical hits or special events.
+ - [ ] Implement Unicode symbols for actions:
+ - [ ] ⚔️ for attacks.
+ - [ ] 💀 for character deaths.
+ - [ ] 🛡️ for defense actions.
+ - [ ] 🧙‍♂️ for spell casting.
+ - [ ] Implement logging method in `GameEngine`:
     ```csharp
     public void LogAction(string message, string type)
     {
@@ -82,11 +82,11 @@ Step 4:
     ```
 
 - [ ] **Improve Combat Randomness:**
-  - [ ] Balance adjustments:
-    - [ ] Ensure each character class has balanced attributes.
-    - [ ] Randomize initial attributes within a certain range to add variability.
-  - [ ] Introduce higher randomness in attack outcomes.
-  - [ ] Implement critical hits with extra damage:
+- [ ] Balance adjustments:
+- [ ] Ensure each character class has balanced attributes.
+- [ ] Randomize initial attributes within a certain range to add variability.
+- [ ] Introduce higher randomness in attack outcomes.
+- [ ] Implement critical hits with extra damage:
     ```csharp
     public int CalculateDamage(Character attacker, Character defender)
     {
@@ -106,7 +106,7 @@ Step 4:
     ```
 
 - [ ] **Simulate Fairer Battles:**
-  - [ ] Randomize character attributes during creation:
+- [ ] Randomize character attributes during creation:
     ```csharp
     public void CreateCharacter(string type)
     {
@@ -125,10 +125,9 @@ Step 4:
         // Repeat for other classes...
     }
     ```
-  - [ ] Ensure balanced team creation with similar variability.
-
+- [ ] Ensure balanced team creation with similar variability.
 - [ ] **Update Battle Simulation:**
-  - [ ] Implement turn-based random target selection:
+- [ ] Implement turn-based random target selection:
     ```csharp
     public void SimulateBattle()
     {
@@ -149,7 +148,6 @@ Step 4:
     ```
  
 
-#Note: the Battle sim is just a for loop 0-99
 Each team figths til all memnber of opposing team has 0 in healt... 
 
 
