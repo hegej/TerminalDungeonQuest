@@ -47,7 +47,7 @@ Step 3:
  
 Step 4:
  - [ ] **Enhance Logging System:**
- - [ ] Add a option when starting sim for slow or fast,,, if slow 1 action ever 0.5 sec. fast 1 action ever 0.1 sec
+ - [ ] Add a option when starting sim for slow or fast,,, if slow 1 action ever 0.5 sec. fast 1 action ever 0.1 sec,,, and a third option,,, enter for player contorled log... enter to go to next action.
  - [ ] Use ANSI escape codes for color-coded output:
  - [ ] Red for enemy actions.
  - [ ] Blue for friendly actions.
