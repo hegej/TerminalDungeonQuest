@@ -1,11 +1,12 @@
 ﻿using DungeonGameLogic;
+using DungeonGameLogic.Enums;
 
 namespace DungeonGameSimulator
 {
     public class BattleSimulator
     {
 
-        public void RunSimulation(int numberOfSimulations = 10)
+        public void RunSimulation(int numberOfSimulations = 5, SimulationSpeed speed = SimulationSpeed.Fast)
         {
             var gameEngine = new GameEngine();
             var simulationResults = new List<string>();
@@ -21,9 +22,9 @@ namespace DungeonGameSimulator
                         gameEngine.CreateTeam($"Blue Team{i}", isEnemy: false)
                     };
 
-                    var battleEngine = new BattleEngine(teams);
+                    var battleEngine = new BattleEngine(teams, speed);
 
-                    battleEngine.SimulateBattle(teams);
+                    battleEngine.SimulateBattle();
                     var result = ($"Simulation {i} completed.\n Winner is: {DetermineWinner(teams)}");
                     BattleLogger.Log(result);
                     simulationResults.Add(result);
@@ -35,7 +36,14 @@ namespace DungeonGameSimulator
                     simulationResults.Add(errorMessage);
                 }
 
-                System.Threading.Thread.Sleep(2000);
+                if (speed != SimulationSpeed.Manual)
+                {
+                    System.Threading.Thread.Sleep(2000);
+                }
+                else
+                {
+                    Console.WriteLine("Press Enter to start the next simulation");
+                }
             }
 
             DisplaySimulationResults(simulationResults);
