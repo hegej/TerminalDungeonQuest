@@ -9,8 +9,9 @@ namespace DungeonGameLogic
         private List<Team> _teams;
         private Random _random = new Random();
         private List<string> _battleLog = new List<string>();
+        private SimulationSpeed _speed;
 
-        public BattleEngine(List<Team> teams)
+        public BattleEngine(List<Team> teams, SimulationSpeed speed)
         {
             if (teams.Count < 2)
             {
@@ -18,9 +19,10 @@ namespace DungeonGameLogic
             }
 
            _teams = teams;
+           _speed = speed;
         }
 
-        public void SimulateBattle(List<Team> teams)
+        public void SimulateBattle()
         {
             var round = 1;
             while (_teams.Count(t => t.AliveMembers()) > 1)
@@ -28,6 +30,20 @@ namespace DungeonGameLogic
                 BattleLogger.LogBattleRoundStart(round);
                 ExecuteRound();
                 round++;
+
+                switch (_speed)
+                {
+                    case SimulationSpeed.Fast:
+                        Thread.Sleep(100);
+                        break;
+                    case SimulationSpeed.Slow:
+                        Thread.Sleep(500);
+                        break;
+                    case SimulationSpeed.Manual:
+                        Console.WriteLine("Press Enter...");
+                        Console.ReadLine();
+                        break;
+                }
             }
             LogBattleEnd();
         }

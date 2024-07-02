@@ -111,15 +111,5 @@ namespace DungeonGameLogic
 
             return team;
         }
-
-        private void InitializeBattleEngine()
-        {
-            _battleEngine = new BattleEngine(_teams);
-        }
-
-        private void SimulateBattle()
-        {
-            _battleEngine.SimulateBattle(_teams);
-        }
     }
 }
