@@ -1,22 +1,26 @@
 ﻿using DungeonGameLogic.Enums;
 using DungeonGameSimulator;
+using DungeonGameSimulator.Utilities;
+using Spectre.Console;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
 
-        DisplayStartPage();
+        TestGameConsole();
 
-        while (true)
-        {
-            var key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.Enter)
-            {
-                RunSimulation();
-                break;
-            }
-        }
+        //DisplayStartPage();
+
+        //while (true)
+        //{
+        //    var key = Console.ReadKey(true);
+        //    if (key.Key == ConsoleKey.Enter)
+        //    {
+        //        RunSimulation();
+        //        break;
+        //    }
+        //}
 
     }
 
@@ -126,5 +130,28 @@ internal class Program
                 Console.WriteLine("Invalid input. Enter a number (1-3).");
             }
         }
+    }
+
+    static void TestGameConsole()
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+        GameConsole.Initialize();
+        GameConsole.TestEmojiSupport();
+        GameConsole.LogBattleStart();
+
+        GameConsole.LogAction("A Mighty dragon appears.", LogType.Enemy, Emoji.Known.Dragon);
+        GameConsole.LogAction("The brave warrior draws his sword.", LogType.Friendly, Emoji.Known.Dagger);
+        GameConsole.LogAction("The White Mage prepares a powerful spell.", LogType.Friendly, Emoji.Known.Sparkles);
+
+        GameConsole.DisplayCharacterStats("Warrior", 5, 100, 0);
+        GameConsole.DisplayCharacterStats("White Mage", 5, 80, 100);
+        GameConsole.DisplayCharacterStats("Dragon", 8, 150, 50);
+
+        GameConsole.LogAction("Warrior attacks the dragon!", LogType.Friendly, Emoji.Known.CrossedSwords);
+        GameConsole.LogAction("Critical hit! The dragon takes massive damage!", LogType.Critical, Emoji.Known.Collision);
+        GameConsole.LogAction("The dragon breaths fire!", LogType.Enemy, Emoji.Known.Fire);
+        GameConsole.LogAction("The White Mage casts a healing spell on the warrior.", LogType.Healing, Emoji.Known.SparklingHeart);
+
+        GameConsole.LogBattleEnd("The dragon flies away. The Warrior and the White Mage celebrate.");
     }
 }
