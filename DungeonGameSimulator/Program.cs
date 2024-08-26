@@ -8,19 +8,19 @@ internal class Program
     private static void Main(string[] args)
     {
 
-        TestGameConsole();
+        //TestGameConsole();
 
-        //DisplayStartPage();
+        DisplayStartPage();
 
-        //while (true)
-        //{
-        //    var key = Console.ReadKey(true);
-        //    if (key.Key == ConsoleKey.Enter)
-        //    {
-        //        RunSimulation();
-        //        break;
-        //    }
-        //}
+        while (true)
+        {
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Enter)
+            {
+                RunSimulation();
+                break;
+            }
+        }
 
     }
 

@@ -1,15 +1,18 @@
 ﻿using Spectre.Console;
 using DungeonGameLogic.Enums;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace DungeonGameSimulator.Utilities
 {
     public static class GameConsole
     {
-        private static readonly Style EnemyStyle = new(Color.Red);
-        private static readonly Style FriendlyStyle = new(Color.Blue);
-        private static readonly Style CriticalStyle = new(Color.Yellow);
-        private static readonly Style HealingStyle = new(Color.Green);
-        private static readonly Style NarratorStyle = new(Color.Grey);
+        private static readonly Style EnemyStyle = new(Spectre.Console.Color.Red);
+        private static readonly Style FriendlyStyle = new(Spectre.Console.Color.Blue);
+        private static readonly Style CriticalStyle = new(Spectre.Console.Color.Yellow);
+        private static readonly Style HealingStyle = new(Spectre.Console.Color.Green);
+        private static readonly Style NarratorStyle = new(Spectre.Console.Color.Grey);
         private static bool _useEmoji = true;
 
         public static void Initialize()
@@ -17,7 +20,7 @@ namespace DungeonGameSimulator.Utilities
             AnsiConsole.Write(
                 new FigletText("Dungeon Quest")
                 .LeftJustified()
-                .Color(Color.DarkOrange));
+                .Color(Spectre.Console.Color.DarkOrange));
 
             AnsiConsole.WriteLine();
         }
@@ -98,13 +101,32 @@ namespace DungeonGameSimulator.Utilities
             AnsiConsole.WriteLine();
         }
 
-        public static void DisplayCharacterStats(string name, int level, int health, int mana)
+        public static CanvasImage GenerateCharacterImage(string filePath)
         {
-            var table = new Table().BorderColor(Color.Grey);
-            table.AddColumn(name);
-            table.AddRow($"[red]HP: {health}[/] | [green]Level: {level}[/] | [blue]MP: {mana}[/]");
-            AnsiConsole.Write(table);
+            using var image = SixLabors.ImageSharp.Image.Load<Rgba32>(filePath);
+            image.Mutate(x => x.Resize(new SixLabors.ImageSharp.Size(20, 10)));
+
+            var canvasImage = new CanvasImage(filePath);
+            canvasImage.MaxWidth(20);
+            canvasImage.MaxWidth(10);
+
+            return canvasImage;
         }
+
+        public static void DisplayCharacterStats(string name, int level, int health, int mana, string imagePath = null)
+        {
+            var layout = new Layout("Root")
+                .SplitColumns(new Layout("Left"), new Layout("Right").SplitRows(new Layout("Top"), new Layout("Bottom")));
+
+            layout["left"].Update(imagePath != null ? GenerateCharacterImage(imagePath) : new Panel("no image").Expand());
+
+            layout["Right"]["Top"].Update(new Panel(Align.Center(new Markup($"[bold]{name}[/]\n [red]HP: {health}[/] | [green]Level: {level}[/] | [blue]MP: {mana}[/]"))).Expand());
+
+            layout["RIght"]["Bottom"].Update(new Panel(Align.Center(new Markup("[gray]Special Attack[/]"))).Expand());
+
+            AnsiConsole.Write(layout);
+        }
+
 
         
     }
