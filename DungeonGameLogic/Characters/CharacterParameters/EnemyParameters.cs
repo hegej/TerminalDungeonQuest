@@ -12,6 +12,8 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public EnemyType EnemyType { get; set; }
         public List<MageSpellPower> Spells { get; set; }
 
+        private static Random rand = new Random();
+
         public EnemyParameters(string name, EnemyType type)
         {
             Name = name;
@@ -25,65 +27,71 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             {
                 case EnemyType.Mage:
                     Level = 1;
-                    Health = 8;
-                    Mana = 20;
+                    Health = rand.Next(6, 10);
+                    Mana = rand.Next(15, 25);
                     InitialMana = Mana;
-                    ManaRegen = 2;
-                    Strength = 1;
-                    ArmorClass = 10;
+                    ManaRegen = rand.Next(2, 4);
+                    Strength = rand.Next(2, 5);
+                    ArmorClass = rand.Next(8, 12);
                     SpecialAbility = new SpecialAbility { Name = "Shadow Bolt" };
-                    Initiative = 15;
-                    Speed = 11;
+                    Initiative = rand.Next(13, 17);
+                    Speed = rand.Next(9, 13);
                     THAC0 = 20;
                     Spells = InitializeEnemyMageSpells();
                     break;
+
                 case EnemyType.Hunter:
                     Level = 1;
-                    Health = 8;
-                    Strength = 5;
-                    ArmorClass = 8;
+                    Health = rand.Next(7, 11);
+                    Strength = rand.Next(4, 7);
+                    ArmorClass = rand.Next(7, 10);
                     SpecialAbility = new SpecialAbility { Name = "Summon Warg" };
-                    Initiative = 13;
-                    Speed = 14;
+                    Initiative = rand.Next(12, 15);
+                    Speed = rand.Next(12, 16);
                     THAC0 = 19;
                     break;
+
                 case EnemyType.Warrior:
                     Level = 1;
-                    Health = 10;
-                    Strength = 5;
-                    ArmorClass = 6;
+                    Health = rand.Next(8, 12);
+                    Strength = rand.Next(5, 7);
+                    ArmorClass = rand.Next(5, 8);
                     SpecialAbility = new SpecialAbility { Name = "Power Strike" };
-                    Initiative = 19;
-                    Speed = 9;
+                    Initiative = rand.Next(16, 20);
+                    Speed = rand.Next(7, 11);
                     THAC0 = 17;
                     break;
+
                 case EnemyType.Rogue:
                     Level = 1;
-                    Health = 8;
-                    Strength = 5;
-                    ArmorClass = 7;
+                    Health = rand.Next(6, 9);
+                    Strength = rand.Next(4, 6);
+                    ArmorClass = rand.Next(6, 9);
                     SpecialAbility = new SpecialAbility { Name = "Stealth Attack" };
-                    Initiative = 11;
-                    Speed = 15;
+                    Initiative = rand.Next(10, 13);
+                    Speed = rand.Next(13, 17);
                     THAC0 = 19;
                     break;
+
                 case EnemyType.Paladin:
                     Level = 1;
-                    Health = 10;
-                    Mana = 8;
+                    Health = rand.Next(8, 12);
+                    Mana = rand.Next(5, 10);
                     InitialMana = Mana;
-                    ManaRegen = 1;
-                    Strength = 5;
-                    ArmorClass = 5;
+                    ManaRegen = rand.Next(1, 3);
+                    Strength = rand.Next(5, 7);
+                    ArmorClass = rand.Next(5, 8);
                     SpecialAbility = new SpecialAbility { Name = "Tormentor" };
-                    Initiative = 17;
-                    Speed = 8;
+                    Initiative = rand.Next(15, 18);
+                    Speed = rand.Next(7, 10);
                     THAC0 = 16;
                     break;
+
                 default:
                     throw new ArgumentException("Invalid enemy type specified.");
             }
         }
+
 
         private List<MageSpellPower> InitializeEnemyMageSpells()
         {

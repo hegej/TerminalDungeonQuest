@@ -9,10 +9,6 @@ namespace DungeonGameLogic
         private BattleEngine _battleEngine;
         private List<Team> _teams = new List<Team>();
 
-        public GameEngine()
-        {
-        }
-
         public Character CreateCharacter(string type, string name, string gender, string specificType = null)
         {
             if (!Enum.TryParse<CharacterType>(type, true, out var characterType))
@@ -100,12 +96,14 @@ namespace DungeonGameLogic
                 team.AddMember(CreateEnemy("Enemy Rogue", EnemyType.Rogue));
                 team.AddMember(CreateEnemy("Enemy Warrior", EnemyType.Warrior));
                 team.AddMember(CreateEnemy("Enemy Paladin", EnemyType.Paladin));
+                team.AddMember(CreateEnemy("Enemy Mage", EnemyType.Mage));
             }
             else
             {
                 team.AddMember(CreateCharacter("Hunter", "Argon", "Male"));
                 team.AddMember(CreateCharacter("Mage", "FaLuna", "Female", "WhiteMage"));
                 team.AddMember(CreateCharacter("Warrior", "Jarvis", "Male"));
+                team.AddMember(CreateCharacter("Rogue", "Shadow", "Female"));
                 team.AddMember(CreateCharacter("Paladin", "Raona", "Female"));
             }
 
