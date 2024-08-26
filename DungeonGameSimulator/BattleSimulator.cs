@@ -17,7 +17,7 @@ namespace DungeonGameSimulator
 
         public void RunSimulation(int numberOfSimulations = 5, SimulationSpeed speed = SimulationSpeed.Fast)
         {
-            Console.BufferHeight = short.MaxValue - 1;
+            //Console.BufferHeight = short.MaxValue - 1;
 
             var gameEngine = new GameEngine();
             var simulationResults = new List<string>();
