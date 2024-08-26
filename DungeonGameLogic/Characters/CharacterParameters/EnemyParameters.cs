@@ -27,63 +27,63 @@ namespace DungeonGameLogic.Characters.CharacterParameters
             {
                 case EnemyType.Mage:
                     Level = 1;
-                    Health = rand.Next(6, 10);
-                    Mana = rand.Next(15, 25);
+                    Health = rand.Next(60, 80);
+                    Mana = rand.Next(80, 100);
                     InitialMana = Mana;
-                    ManaRegen = rand.Next(2, 4);
-                    Strength = rand.Next(2, 5);
-                    ArmorClass = rand.Next(8, 12);
+                    ManaRegen = rand.Next(3, 5);
+                    Strength = rand.Next(5, 10);
+                    ArmorClass = rand.Next(10, 15);
                     SpecialAbility = new SpecialAbility { Name = "Shadow Bolt" };
-                    Initiative = rand.Next(13, 17);
-                    Speed = rand.Next(9, 13);
+                    Speed = rand.Next(8, 12);
+                    Experience = 0;
                     THAC0 = 20;
+                    Initiative = rand.Next(12, 16);
                     Spells = InitializeEnemyMageSpells();
                     break;
 
                 case EnemyType.Hunter:
                     Level = 1;
-                    Health = rand.Next(7, 11);
-                    Strength = rand.Next(4, 7);
-                    ArmorClass = rand.Next(7, 10);
+                    Health = rand.Next(80, 100);
+                    Strength = rand.Next(18, 22);
+                    ArmorClass = rand.Next(12, 15);
                     SpecialAbility = new SpecialAbility { Name = "Summon Warg" };
-                    Initiative = rand.Next(12, 15);
-                    Speed = rand.Next(12, 16);
-                    THAC0 = 19;
+                    Initiative = rand.Next(14, 18);
+                    THAC0 = 18;
                     break;
 
                 case EnemyType.Warrior:
                     Level = 1;
-                    Health = rand.Next(8, 12);
-                    Strength = rand.Next(5, 7);
-                    ArmorClass = rand.Next(5, 8);
-                    SpecialAbility = new SpecialAbility { Name = "Power Strike" };
-                    Initiative = rand.Next(16, 20);
-                    Speed = rand.Next(7, 11);
+                    Health = rand.Next(100, 120);
+                    Strength = rand.Next(20, 25);
+                    ArmorClass = rand.Next(15, 18);
+                    SpecialAbility = new SpecialAbility { Name = "PowerStrikes" };
+                    Initiative = rand.Next(10, 14);
+                    Speed = rand.Next(10, 15);
                     THAC0 = 17;
                     break;
 
                 case EnemyType.Rogue:
                     Level = 1;
-                    Health = rand.Next(6, 9);
-                    Strength = rand.Next(4, 6);
-                    ArmorClass = rand.Next(6, 9);
+                    Health = rand.Next(70, 90);
+                    Strength = rand.Next(15, 20);
+                    ArmorClass = rand.Next(12, 16);
                     SpecialAbility = new SpecialAbility { Name = "Stealth Attack" };
-                    Initiative = rand.Next(10, 13);
-                    Speed = rand.Next(13, 17);
+                    Initiative = rand.Next(16, 20);
+                    Speed = rand.Next(15, 20);
                     THAC0 = 19;
                     break;
 
                 case EnemyType.Paladin:
                     Level = 1;
-                    Health = rand.Next(8, 12);
-                    Mana = rand.Next(5, 10);
+                    Health = rand.Next(110, 130);
+                    Mana = rand.Next(50, 70);
                     InitialMana = Mana;
-                    ManaRegen = rand.Next(1, 3);
-                    Strength = rand.Next(5, 7);
-                    ArmorClass = rand.Next(5, 8);
+                    ManaRegen = rand.Next(2, 4);
+                    Strength = rand.Next(18, 22);
+                    ArmorClass = rand.Next(16, 19);
                     SpecialAbility = new SpecialAbility { Name = "Tormentor" };
-                    Initiative = rand.Next(15, 18);
-                    Speed = rand.Next(7, 10);
+                    Initiative = rand.Next(8, 12);
+                    Speed = rand.Next(10, 15);
                     THAC0 = 16;
                     break;
 
