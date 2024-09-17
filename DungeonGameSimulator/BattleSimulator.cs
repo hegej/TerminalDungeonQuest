@@ -70,11 +70,11 @@ namespace DungeonGameSimulator
             table.AddColumn("Simulation");
             table.AddColumn("Winner");
 
-            for (int i = 0; i < results.Count; i++)
+            for (var i = 0; i < results.Count; i++)
             {
                 var result = results[i];
                 var winner = result.Split('\n').Last().Trim();
-                string coloredWinner = winner.Contains("Red Team") ? $"[red]{winner}[/]" : $"[blue]{winner}[/]";
+                var coloredWinner = winner.Contains("Red Team") ? $"[red]{winner}[/]" : $"[blue]{winner}[/]";
                 table.AddRow($"Simulation {i + 1}", coloredWinner);
             }
 

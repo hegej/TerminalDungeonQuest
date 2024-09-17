@@ -1,6 +1,7 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Characters;
 using DungeonGameLogic.Enums;
+using Spectre.Console;
 namespace DungeonGameLogic
 {
     public class BattleEngine
@@ -28,7 +29,7 @@ namespace DungeonGameLogic
             {
                 foreach (var character in team.Members)
                 {
-                    Logger.DisplayCharacterStats(character);
+                    DisplayCharacterStats(character);
                 }
             }
 
@@ -70,7 +71,7 @@ namespace DungeonGameLogic
 
         public void ExecuteRound()
         {
-            List<Character> allCharacters = _teams.SelectMany(t => t.GetAliveMembers()).ToList();
+            var allCharacters = _teams.SelectMany(t => t.GetAliveMembers()).ToList();
 
             allCharacters.Sort((a, b) =>
             {
@@ -80,8 +81,8 @@ namespace DungeonGameLogic
                 var speedComparison = b.Speed.CompareTo(a.Speed);
                 if (speedComparison != 0) return speedComparison;
 
-                Team aTeam = _teams.First(t => t.Name == a.Team);
-                Team bTeam = _teams.First(t => t.Name == b.Team);
+                var aTeam = _teams.First(t => t.Name == a.Team);
+                var bTeam = _teams.First(t => t.Name == b.Team);
                 return aTeam.Priority.CompareTo(bTeam.Priority);
             });
 
@@ -254,5 +255,104 @@ namespace DungeonGameLogic
             var winningTeam = _teams.FirstOrDefault(t => t.AliveMembers());
             Logger.LogBattleEnd(winningTeam?.Name ?? "No winner (Draw)");
         }
+
+        public static void DisplayCharacterStats(Character character)
+        {
+            var characterSymbol = GetCharacterSymbol(character.GetType().Name);
+            var table = new Table()
+                .Border(TableBorder.Square)
+                .AddColumn(new TableColumn("Attribute").Centered())
+                .AddColumn(new TableColumn("Value").Centered());
+            table.AddRow($"{characterSymbol} [bold]{character.Name}[/]", $"[bold]{character.GetType().Name}[/]");
+            table.AddRow("[red]Health[/]", $"{character.Health}/{character.MaxHealth}");
+            table.AddRow("[green]Level[/]", character.Level.ToString());
+            if (character is Mage mage)
+            {
+                table.AddRow("[blue]Mana[/]", $"{mage.Mana}/{mage.InitialMana}");
+            }
+            table.AddRow("Strength", character.Strength.ToString());
+            table.AddRow("Armor Class", character.ArmorClass.ToString());
+            table.AddRow("Speed", character.Speed.ToString());
+            table.AddRow("THAC0", character.THAC0.ToString());
+            AnsiConsole.Write(table);
+        }
+
+        private static bool _useEmoji = true;
+        public static string GetCharacterSymbol(string characterType)
+        {
+            if (CharacterEmoji.TryGetValue(characterType, out var emoji))
+            {
+                return _useEmoji ? emoji : GetFallbackSymbol(emoji);
+            }
+            return "";
+        }
+
+        private static readonly Dictionary<string, string> CharacterEmoji = new Dictionary<string, string>
+        {
+            { "Mage", Emoji.Known.Mage },
+            { "Warrior", Emoji.Known.Man },
+            { "Rogue", Emoji.Known.Ninja },
+            { "Paladin", Emoji.Known.PersonBeard },
+            { "Hunter", Emoji.Known.Elf }
+        };
+
+        public static string GetActionSymbol(string action)
+        {
+            if (ActionEmoji.TryGetValue(action, out var emoji))
+            {
+                return _useEmoji ? emoji : GetFallbackSymbol(emoji);
+            }
+            return "";
+        }
+
+        private static string GetFallbackSymbol(string emoji)
+        {
+            return EmojiFallback.TryGetValue(emoji, out var fallback) ? fallback : "";
+        }
+
+        private static readonly Dictionary<string, string> ActionEmoji = new Dictionary<string, string>
+        {
+            { "Attack", Emoji.Known.CrossedSwords },
+            { "Heal", Emoji.Known.SparklingHeart },
+            { "Defense", Emoji.Known.Shield },
+            { "Death", Emoji.Known.Skull },
+            { "Spell", Emoji.Known.Sparkles }
+        };
+
+        private static readonly Dictionary<string, string> EmojiFallback = new Dictionary<string, string>
+        {
+            { Emoji.Known.Mage, "M" },
+            { Emoji.Known.Man, "W" },
+            { Emoji.Known.Ninja, "R" },
+            { Emoji.Known.PersonBeard, "P" },
+            { Emoji.Known.Elf, "H" },
+            { Emoji.Known.CrossedSwords, "X" },
+            { Emoji.Known.SparklingHeart, "+" },
+            { Emoji.Known.Shield, "D" },
+            { Emoji.Known.Skull, "!" },
+            { Emoji.Known.Sparkles, "*" }
+        };
+
+        public static void DisplayTeamStats(Team team)
+        {
+            var table = new Table()
+                .Border(TableBorder.Square)
+                .AddColumn(new TableColumn("Character").Centered())
+                .AddColumn(new TableColumn("Health").Centered())
+                .AddColumn(new TableColumn("Level").Centered());
+            foreach (var character in team.Members)
+            {
+                var characterSymbol = GetCharacterSymbol(character.GetType().Name);
+                table.AddRow(
+                    $"{characterSymbol} {character.Name}",
+                    $"[red]{character.Health}/{character.MaxHealth}[/]",
+                    $"[green]{character.Level}[/]"
+                );
+            }
+            AnsiConsole.Write(new Rule($"[blue]{team.Name}[/]").RuleStyle(Style.Parse("blue")));
+            AnsiConsole.Write(table);
+            AnsiConsole.WriteLine();
+        }
+
     }
 }

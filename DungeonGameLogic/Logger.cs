@@ -1,5 +1,4 @@
 ﻿using DungeonGameLogic;
-using DungeonGameLogic.Characters;
 using DungeonGameLogic.Enums;
 using Spectre.Console;
 using System.Text.Json;
@@ -10,12 +9,12 @@ public static class Logger
     private static readonly string _logDirectory = @"C:/DungeonQuest/BattleLog";
     private static readonly string _logFilePath;
     private static bool _isLoggingEnabled = true;
-    private static readonly Style EnemyStyle = new(Spectre.Console.Color.Red);
-    private static readonly Style FriendlyStyle = new(Spectre.Console.Color.Blue);
-    private static readonly Style CriticalStyle = new(Spectre.Console.Color.Yellow);
-    private static readonly Style HealingStyle = new(Spectre.Console.Color.Green);
-    private static readonly Style NormalStyle = new(Spectre.Console.Color.Grey);
-    private static bool _useEmoji = true;
+    private static readonly Style EnemyStyle = new(Color.Red);
+    private static readonly Style FriendlyStyle = new(Color.Blue);
+    private static readonly Style CriticalStyle = new(Color.Yellow);
+    private static readonly Style HealingStyle = new(Color.Green);
+    private static readonly Style NormalStyle = new(Color.Grey);
+
 
     static Logger()
     {
@@ -75,24 +74,10 @@ public static class Logger
         File.WriteAllText(_logFilePath, jsonString);
     }
 
-    public static void LogAction(string actionDetails)
-    {
-        Log($"Action: {actionDetails}");
-    }
-
-    public static void LogBattleOutcome(string outcomeDetails)
-    {
-        Log($"Outcome: {outcomeDetails}");
-    }
-    public static void LogBattleRoundStart(int round)
-    {
-        Log($"Round {round} begins.");
-    }
-
     public static void LogAction(string message, LogType type, string action)
     {
-        string emoji = GetActionSymbol(action);
-        Style borderStyle = type switch
+        var emoji = BattleEngine.GetActionSymbol(action);
+        var borderStyle = type switch
         {
             LogType.Enemy => EnemyStyle,
             LogType.Friendly => FriendlyStyle,
@@ -101,7 +86,7 @@ public static class Logger
             _ => NormalStyle
         };
 
-        BoxBorder borderType = type switch
+        var borderType = type switch
         {
             LogType.Enemy => BoxBorder.Heavy,
             LogType.Friendly => BoxBorder.Double,
@@ -125,45 +110,7 @@ public static class Logger
         };
 
         AnsiConsole.Write(panel);
-    }
-
-
-    private static string GetActionSymbol(string action)
-    {
-        if (ActionEmoji.TryGetValue(action, out var emoji))
-        {
-            return _useEmoji ? emoji : GetFallbackSymbol(emoji);
-        }
-        return "";
-    }
-
-    public static string GetCharacterSymbol(string characterType)
-    {
-        if (CharacterEmoji.TryGetValue(characterType, out var emoji))
-        {
-            return _useEmoji ? emoji : GetFallbackSymbol(emoji);
-        }
-        return "";
-    }
-
-    private static string GetFallbackSymbol(string emoji)
-    {
-        return EmojiFallback.TryGetValue(emoji, out var fallback) ? fallback : "";
-    }
-
-    public static void TestEmojiSupport()
-    {
-        try
-        {
-            var testEmoji = Emoji.Known.CrossedSwords;
-            _useEmoji = true;
-        }
-        catch
-        {
-            _useEmoji = false;
-            Console.WriteLine("Emoji support is not available. Using text fallback.");
-        }
-    }
+    } 
 
     public static void LogBattleStart()
     {
@@ -185,79 +132,4 @@ public static class Logger
         AnsiConsole.Write(new Markup($"[green]Winner: {winner}[/]").Centered());
         AnsiConsole.WriteLine();
     }
-
-    public static void DisplayCharacterStats(DungeonGameLogic.Characters.Character character)
-    {
-        string characterSymbol = GetCharacterSymbol(character.GetType().Name);
-        var table = new Table()
-            .Border(TableBorder.Square)
-            .AddColumn(new TableColumn("Attribute").Centered())
-            .AddColumn(new TableColumn("Value").Centered());
-        table.AddRow($"{characterSymbol} [bold]{character.Name}[/]", $"[bold]{character.GetType().Name}[/]");
-        table.AddRow("[red]Health[/]", $"{character.Health}/{character.MaxHealth}");
-        table.AddRow("[green]Level[/]", character.Level.ToString());
-        if (character is Mage mage)
-        {
-            table.AddRow("[blue]Mana[/]", $"{mage.Mana}/{mage.InitialMana}");
-        }
-        table.AddRow("Strength", character.Strength.ToString());
-        table.AddRow("Armor Class", character.ArmorClass.ToString());
-        table.AddRow("Speed", character.Speed.ToString());
-        table.AddRow("THAC0", character.THAC0.ToString());
-        AnsiConsole.Write(table);
-    }
-
-    public static void DisplayTeamStats(DungeonGameLogic.Team team)
-    {
-        var table = new Table()
-            .Border(TableBorder.Square)
-            .AddColumn(new TableColumn("Character").Centered())
-            .AddColumn(new TableColumn("Health").Centered())
-            .AddColumn(new TableColumn("Level").Centered());
-        foreach (var character in team.Members)
-        {
-            string characterSymbol = GetCharacterSymbol(character.GetType().Name);
-            table.AddRow(
-                $"{characterSymbol} {character.Name}",
-                $"[red]{character.Health}/{character.MaxHealth}[/]",
-                $"[green]{character.Level}[/]"
-            );
-        }
-        AnsiConsole.Write(new Rule($"[blue]{team.Name}[/]").RuleStyle(Style.Parse("blue")));
-        AnsiConsole.Write(table);
-        AnsiConsole.WriteLine();
-    }
-
-    private static readonly Dictionary<string, string> CharacterEmoji = new Dictionary<string, string>
-        {
-            { "Mage", Emoji.Known.Mage },
-            { "Warrior", Emoji.Known.Man },
-            { "Rogue", Emoji.Known.Ninja },
-            { "Paladin", Emoji.Known.PersonBeard },
-            { "Hunter", Emoji.Known.Elf }
-        };
-
-    private static readonly Dictionary<string, string> ActionEmoji = new Dictionary<string, string>
-        {
-            { "Attack", Emoji.Known.CrossedSwords },
-            { "Heal", Emoji.Known.SparklingHeart },
-            { "Defense", Emoji.Known.Shield },
-            { "Death", Emoji.Known.Skull },
-            { "Spell", Emoji.Known.Sparkles }
-        };
-
-    private static readonly Dictionary<string, string> EmojiFallback = new Dictionary<string, string>
-        {
-            { Emoji.Known.Mage, "M" },
-            { Emoji.Known.Man, "W" },
-            { Emoji.Known.Ninja, "R" },
-            { Emoji.Known.PersonBeard, "P" },
-            { Emoji.Known.Elf, "H" },
-            { Emoji.Known.CrossedSwords, "X" },
-            { Emoji.Known.SparklingHeart, "+" },
-            { Emoji.Known.Shield, "D" },
-            { Emoji.Known.Skull, "!" },
-            { Emoji.Known.Sparkles, "*" }
-        };
-
 }

@@ -1,6 +1,7 @@
 ﻿using DungeonGameLogic.Characters;
 using DungeonGameLogic.Characters.CharacterParameters;
 using DungeonGameLogic.Enums;
+using Spectre.Console;
 
 namespace DungeonGameLogic
 {
@@ -13,6 +14,74 @@ namespace DungeonGameLogic
         {
             CreateTeams();
             BalanceTeams(_teams[0], _teams[1]);
+        }
+
+        public static void DisplayStartPage()
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+                new Panel(
+                        @"
+                                           ..::.                                              
+                                        .....:::...                                           
+                                       ......::::::.                                          
+                                     ........-------..                                        
+                                    .......:++=------..                                       
+                                   ......=#%%%%#+====-...                                     
+                                  ....-*%%%%%%%%%%#*+=-:...                                   
+                                 ..-#%%%%%%%###%#%%%%%%#-::.:                                 
+                               ...=#%%##+#**#**#%#%%%%%%%#**+=                                
+                               ..-#****+**+==+**%@%%%%%%%%%#*+                                
+                              .-*###**++#@#-=+*#%%%#%%%%%%%%%#+                               
+                              :*###%#%#==+++=+**####%%%%@@%%%%#                               
+                              :####%%@@#-----=+++**#@%%@@@##%##                               
+                               +=##%%%@@%#=---++*%@@@@@@@%%+*#*                               
+                              =--+*##%%@@@@@%##*%@@@@@%%%%%*##+                               
+                             -==*#*#%%@*-:--=+**#%#+#@@@%%%#*#                                
+                              =--**#%%+:.:::--=+****++*@%%%%%+-                               
+                             --+++*##*:.:=-::-==#%#*++*%%%%%@%#                               
+                           -   +++=+=:.:=--:.:=+####+=+*#%%%%%#                               
+                            -=+=++-....-=-=--:++*###*++*++*##                                 
+                              -==....=+=+***++########*#*+++-:                                
+                               ...-=+***%%%#**##%%%%%%#%###**+=-                              
+                              ...::===*#%#=:+*######%%*####*****+=                            
+                             ...:-:++++#*-:-**##**###%#=####*****+*#*                         
+                             ..:===***#*-:-***##+***#%%*=#######%%%%#                         
+                            .:==+=+++**-:-**#*##+***#%%#=+= *####%%%#+                        
+                       ++***=*====:-*+-::**#####+##*#%%%+++=    %%%%%*                        
+                    ==+****       .++-:..+**#%#**#*#*#%%*++++                                 
+              ===+*###**         .--:::..-+**##**##**#%##+**++=                               
+        ====+*##**             ....:::..:=++++*+*#****#*#****++=                              
+      +=######                 ....::...:=++++++******#*******+++                             
+       -+###                 .....::....-++**+++******#*******++*+                            
+         *                  .....--:...:=+***+++*******#*******++**                           
+                           ....:---:...:=+***++********##*******+**+                          
+                           ..-==+=:...:-++***+**#%%###%%%#*******+**                          
+                           ..-=++==-=++=+******####**##%%%#*******+                           
+                             =-:.=+=*####*****##*##+*##%#%%##******                           
+                              .+**++*+*########**##+*##%##%###*                               
+                                   +**#%@@@%%#######%%%%%*                                    
+                                      #%@@@%       %@@@@%                                     
+                                      *%%@@%       %@@@@@@%                                   
+                                      #*#%%%       %@@@@@@%%         
+
+                        \    / |_  o _|_  _     |\/|  _.  _   _     ._  ._ _   _  _  ._ _|_  _ o
+                         \/\/  | | |  |_ (/_    |  | (_| (_| (/_    |_) | (/_ _> (/_ | | |_ _> o
+                                                          _|        |              
+    "
+                )
+                .Expand()
+                .NoBorder()
+            );
+
+            AnsiConsole.WriteLine();
+
+            AnsiConsole.Write(
+                new FigletText("Dungeon Quest")
+                .LeftJustified()
+                .Color(Color.DarkOrange));
+
+            AnsiConsole.WriteLine();
         }
 
         public Character CreateCharacter(string type, string name, string gender, string specificType = null)
@@ -84,8 +153,8 @@ namespace DungeonGameLogic
 
         public void CreateTeams()
         {
-            Team playerTeam = CreateTeam("Blue Team", false);
-            Team enemyTeam = CreateTeam("Red Team", true);
+            var playerTeam = CreateTeam("Blue Team", false);
+            var enemyTeam = CreateTeam("Red Team", true);
 
             _teams.Add(playerTeam);
             _teams.Add(enemyTeam);
@@ -93,7 +162,7 @@ namespace DungeonGameLogic
 
         public Team CreateTeam(string teamName, bool isEnemy)
         {
-            Team team = new Team(teamName);
+            var team = new Team(teamName);
             team.Priority = isEnemy ? 1 : 0;
 
             if (isEnemy)
@@ -118,8 +187,8 @@ namespace DungeonGameLogic
 
         private void BalanceTeams(Team team1, Team team2)
         {
-            int team1Power = CalculateTeamPower(team1);
-            int team2Power = CalculateTeamPower(team2);
+            var team1Power = CalculateTeamPower(team1);
+            var team2Power = CalculateTeamPower(team2);
 
             while (Math.Abs(team1Power - team2Power) > 5)
             {

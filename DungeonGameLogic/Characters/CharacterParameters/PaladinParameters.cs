@@ -13,7 +13,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 
         public PaladinParameters(string name, GenderType gender)
         {
-            Random rand = new Random();
+            var rand = new Random();
             Name = name;
             Gender = gender;
             Level = 1;
