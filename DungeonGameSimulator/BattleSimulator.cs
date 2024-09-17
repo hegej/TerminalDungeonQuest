@@ -1,18 +1,14 @@
 ﻿using DungeonGameLogic;
 using DungeonGameLogic.Enums;
-using DungeonGameLogic.Interfaces;
-using DungeonGameSimulator.Utilities;
 using Spectre.Console;
 
 namespace DungeonGameSimulator
 {
     public class BattleSimulator
     {
-        private readonly IBattleLogger _logger;
 
         public BattleSimulator()
         {
-            _logger = new GameConsoleLogger();
         }
 
         public void RunSimulation(int numberOfSimulations = 5, SimulationSpeed speed = SimulationSpeed.Fast)
@@ -21,7 +17,7 @@ namespace DungeonGameSimulator
             var simulationResults = new List<string>();
             for (var i = 1; i <= numberOfSimulations; i++)
             {
-                _logger.LogAction($"Simulation {i} starting.", LogType.Normal, "");
+                Logger.LogAction($"Simulation {i} starting.", LogType.Normal, "");
                 try
                 {
                     var teams = new List<Team>
@@ -29,16 +25,16 @@ namespace DungeonGameSimulator
                 gameEngine.CreateTeam($"Red Team{i}", isEnemy: true),
                 gameEngine.CreateTeam($"Blue Team{i}", isEnemy: false)
             };
-                    var battleEngine = new BattleEngine(teams, speed, _logger);
+                    var battleEngine = new BattleEngine(teams, speed);
                     battleEngine.SimulateBattle();
                     var result = ($"Simulation {i} completed.\nWinner is: {DetermineWinner(teams)}");
-                    _logger.LogAction(result, LogType.Normal, "");
+                    Logger.LogAction(result, LogType.Normal, "");
                     simulationResults.Add(result);
                 }
                 catch (Exception ex)
                 {
                     var errorMessage = $"Error in simulation {i}: {ex.Message}";
-                    _logger.LogAction(errorMessage, LogType.Critical, "Error");
+                    Logger.LogAction(errorMessage, LogType.Critical, "Error");
                     simulationResults.Add(errorMessage);
                 }
                 if (speed != SimulationSpeed.Manual)
@@ -74,11 +70,11 @@ namespace DungeonGameSimulator
             table.AddColumn("Simulation");
             table.AddColumn("Winner");
 
-            for (int i = 0; i < results.Count; i++)
+            for (var i = 0; i < results.Count; i++)
             {
                 var result = results[i];
                 var winner = result.Split('\n').Last().Trim();
-                string coloredWinner = winner.Contains("Red Team") ? $"[red]{winner}[/]" : $"[blue]{winner}[/]";
+                var coloredWinner = winner.Contains("Red Team") ? $"[red]{winner}[/]" : $"[blue]{winner}[/]";
                 table.AddRow($"Simulation {i + 1}", coloredWinner);
             }
 

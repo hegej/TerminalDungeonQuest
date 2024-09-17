@@ -14,7 +14,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 
         public MageParameters(string name, GenderType gender, MageType type)
         {
-            Random rand = new Random();
+            var rand = new Random();
             Name = name;
             Gender = gender;
             Type = type;

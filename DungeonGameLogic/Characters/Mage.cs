@@ -87,7 +87,7 @@ namespace DungeonGameLogic.Characters
                 return null;
             }
 
-            int lowestHealth = alliesNeedHealing.Min(c => c.Health);
+            var lowestHealth = alliesNeedHealing.Min(c => c.Health);
             var mostInjuredAllies = alliesNeedHealing.Where(c => c.Health == lowestHealth).ToList();
 
             if (mostInjuredAllies.Count == 1)

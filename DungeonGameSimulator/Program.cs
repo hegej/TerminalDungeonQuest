@@ -1,13 +1,15 @@
-﻿using DungeonGameLogic.Enums;
+﻿using DungeonGameLogic;
+using DungeonGameLogic.Enums;
 using DungeonGameSimulator;
-using DungeonGameSimulator.Utilities;
 using Spectre.Console;
+using System.Text;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        GameConsole.Initialize();
+        Console.OutputEncoding = Encoding.UTF8;
+  
         DisplayStartPage();
 
         while (true)
@@ -23,7 +25,7 @@ internal class Program
 
     private static void DisplayStartPage()
     {
-        GameConsole.DisplayStartPage();
+        GameEngine.DisplayStartPage();
         AnsiConsole.WriteLine("\nPress Enter to start the game simulation");
         AnsiConsole.WriteLine("\nPress 'CTRL+C' to quit");
     }
@@ -31,11 +33,11 @@ internal class Program
     private static void RunSimulation()
     {
         Console.Clear();
-        SimulationSpeed speed = GetSimulationSpeed();
+        var speed = GetSimulationSpeed();
         var simulator = new BattleSimulator();
         simulator.RunSimulation(speed: speed);
 
-        GameConsole.LogAction("Simulation complete. Logs saved to battle_logs.json", LogType.Normal, "");
+        Logger.LogAction("Simulation complete. Logs saved to battle_logs.json", LogType.Normal, "");
 
         AnsiConsole.WriteLine("Press any key to exit");
         Console.ReadKey();
@@ -50,7 +52,7 @@ internal class Program
             AnsiConsole.WriteLine("2. Slow (1.0 seconds per action)");
             AnsiConsole.WriteLine("3. Manual (press Enter for each action)");
 
-            if (int.TryParse(Console.ReadLine(), out int choice))
+            if (int.TryParse(Console.ReadLine(), out var choice))
             {
                 switch (choice)
                 {
