@@ -1,5 +1,6 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Enums;
+using DungeonGameLogic.Utilities;
 
 
 namespace DungeonGameLogic.Characters.CharacterParameters
@@ -12,7 +13,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
         public EnemyType EnemyType { get; set; }
         public List<MageSpellPower> Spells { get; set; }
 
-        private static Random rand = new Random();
+        Random rand = RandomStatsProvider.GetRandom();
 
         public EnemyParameters(string name, EnemyType type)
         {

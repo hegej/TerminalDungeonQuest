@@ -1,5 +1,6 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Enums;
+using DungeonGameLogic.Utilities;
 
 namespace DungeonGameLogic.Characters.CharacterParameters
 {
@@ -11,7 +12,7 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 
         public HunterParameters(string name, GenderType gender)
         {
-            Random rand = new Random();
+            Random rand = RandomStatsProvider.GetRandom();
             Name = name;
             Gender = gender;
             Level = 1;
