@@ -36,8 +36,8 @@ namespace DungeonGameLogic
                 }
             }
 
-            _logger.LogAction("Displaying character stats. Battle will begin in 5 seconds...", LogType.Normal, "");
-            Thread.Sleep(5000);
+            _logger.LogAction("Displaying character stats. Battle will begin in 1 second...", LogType.Normal, "");
+            Thread.Sleep(1000);
 
             var round = 1;
             while (_teams.Count(t => t.AliveMembers()) > 1)
