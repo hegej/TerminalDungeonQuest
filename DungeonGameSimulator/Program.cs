@@ -35,7 +35,7 @@ internal class Program
         var simulator = new BattleSimulator();
         simulator.RunSimulation(speed: speed);
 
-        GameConsole.LogAction("Simulation complete. Logs saved to battle_logs.json", LogType.Normal, "");
+        Logger.LogAction("Simulation complete. Logs saved to battle_logs.json", LogType.Normal, "");
 
         AnsiConsole.WriteLine("Press any key to exit");
         Console.ReadKey();
