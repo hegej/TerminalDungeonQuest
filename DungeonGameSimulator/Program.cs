@@ -1,10 +1,13 @@
-﻿using DungeonGameSimulator;
+﻿using DungeonGameLogic.Enums;
+using DungeonGameSimulator;
+using DungeonGameSimulator.Utilities;
+using Spectre.Console;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-
+        GameConsole.Initialize();
         DisplayStartPage();
 
         while (true)
@@ -16,84 +19,53 @@ internal class Program
                 break;
             }
         }
-
     }
 
     private static void DisplayStartPage()
     {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine(@"
-
-                                           ..::.                                              
-                                        .....:::...                                           
-                                       ......::::::.                                          
-                                     ........-------..                                        
-                                    .......:++=------..                                       
-                                   ......=#%%%%#+====-...                                     
-                                  ....-*%%%%%%%%%%#*+=-:...                                   
-                                 ..-#%%%%%%%###%#%%%%%%#-::.:                                 
-                               ...=#%%##+#**#**#%#%%%%%%%#**+=                                
-                               ..-#****+**+==+**%@%%%%%%%%%#*+                                
-                              .-*###**++#@#-=+*#%%%#%%%%%%%%%#+                               
-                              :*###%#%#==+++=+**####%%%%@@%%%%#                               
-                              :####%%@@#-----=+++**#@%%@@@##%##                               
-                               +=##%%%@@%#=---++*%@@@@@@@%%+*#*                               
-                              =--+*##%%@@@@@%##*%@@@@@%%%%%*##+                               
-                             -==*#*#%%@*-:--=+**#%#+#@@@%%%#*#                                
-                              =--**#%%+:.:::--=+****++*@%%%%%+-                               
-                             --+++*##*:.:=-::-==#%#*++*%%%%%@%#                               
-                           -   +++=+=:.:=--:.:=+####+=+*#%%%%%#                               
-                            -=+=++-....-=-=--:++*###*++*++*##                                 
-                              -==....=+=+***++########*#*+++-:                                
-                               ...-=+***%%%#**##%%%%%%#%###**+=-                              
-                              ...::===*#%#=:+*######%%*####*****+=                            
-                             ...:-:++++#*-:-**##**###%#=####*****+*#*                         
-                             ..:===***#*-:-***##+***#%%*=#######%%%%#                         
-                            .:==+=+++**-:-**#*##+***#%%#=+= *####%%%#+                        
-                       ++***=*====:-*+-::**#####+##*#%%%+++=    %%%%%*                        
-                    ==+****       .++-:..+**#%#**#*#*#%%*++++                                 
-              ===+*###**         .--:::..-+**##**##**#%##+**++=                               
-        ====+*##**             ....:::..:=++++*+*#****#*#****++=                              
-      +=######                 ....::...:=++++++******#*******+++                             
-       -+###                 .....::....-++**+++******#*******++*+                            
-         *                  .....--:...:=+***+++*******#*******++**                           
-                           ....:---:...:=+***++********##*******+**+                          
-                           ..-==+=:...:-++***+**#%%###%%%#*******+**                          
-                           ..-=++==-=++=+******####**##%%%#*******+                           
-                             =-:.=+=*####*****##*##+*##%#%%##******                           
-                              .+**++*+*########**##+*##%##%###*                               
-                                   +**#%@@@%%#######%%%%%*                                    
-                                      #%@@@%       %@@@@%                                     
-                                      *%%@@%       %@@@@@@%                                   
-                                      #*#%%%       %@@@@@@%%         
-
-                        \    / |_  o _|_  _     |\/|  _.  _   _     ._  ._ _   _  _  ._ _|_  _ o
-                         \/\/  | | |  |_ (/_    |  | (_| (_| (/_    |_) | (/_ _> (/_ | | |_ _> o
-                                                          _|        |             
-
-             ________                                             ________                          __   
-             \______ \  __ __  ____    ____   ____  ____   ____   \_____  \  __ __   ____   _______/  |_ 
-              |    |  \|  |  \/    \  / ___\_/ __ \/  _ \ /    \   /  / \  \|  |  \_/ __ \ /  ___/\   __\
-              |    `   \  |  /   |  \/ /_/  >  ___(  <_> )   |  \ /   \_/.  \  |  /\  ___/ \___ \  |  |  
-             /_______  /____/|___|  /\___  / \___  >____/|___|  / \_____\ \_/____/  \___  >____  > |__|  
-                     \/           \//_____/      \/           \/         \__>           \/     \/     
-                                                              
-");
-        Console.ResetColor();
-        Console.WriteLine("\nPress Enter to start the game simulation");
-        Console.WriteLine("\nPress 'CTRL+C' to quit");
+        GameConsole.DisplayStartPage();
+        AnsiConsole.WriteLine("\nPress Enter to start the game simulation");
+        AnsiConsole.WriteLine("\nPress 'CTRL+C' to quit");
     }
 
     private static void RunSimulation()
     {
         Console.Clear();
+        SimulationSpeed speed = GetSimulationSpeed();
         var simulator = new BattleSimulator();
-        simulator.RunSimulation();
+        simulator.RunSimulation(speed: speed);
 
-        Console.WriteLine("Simulation complete. Logs saved to battle_logs.json");
+        GameConsole.LogAction("Simulation complete. Logs saved to battle_logs.json", LogType.Normal, "");
 
-        Console.WriteLine("Press any key to exit");
+        AnsiConsole.WriteLine("Press any key to exit");
         Console.ReadKey();
+    }
+
+    private static SimulationSpeed GetSimulationSpeed()
+    {
+        while (true)
+        {
+            AnsiConsole.WriteLine("Select Simulation speed:");
+            AnsiConsole.WriteLine("1. Fast (0.1 seconds per action)");
+            AnsiConsole.WriteLine("2. Slow (1.0 seconds per action)");
+            AnsiConsole.WriteLine("3. Manual (press Enter for each action)");
+
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                switch (choice)
+                {
+                    case 1: return SimulationSpeed.Fast;
+                    case 2: return SimulationSpeed.Slow;
+                    case 3: return SimulationSpeed.Manual;
+                    default:
+                        AnsiConsole.WriteLine("Invalid choice. Try again.");
+                        break;
+                }
+            }
+            else
+            {
+                AnsiConsole.WriteLine("Invalid input. Enter a number (1-3).");
+            }
+        }
     }
 }

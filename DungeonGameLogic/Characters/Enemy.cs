@@ -13,7 +13,12 @@ namespace DungeonGameLogic.Characters
 
         public Enemy(EnemyParameters enemyParameters) : base(enemyParameters)
         {
+            this.enemyParameters = enemyParameters;
+
             EnemyType = enemyParameters.EnemyType;
+            Mana = enemyParameters.Mana;
+            InitialMana = enemyParameters.Mana;
+            ManaRegen = enemyParameters.ManaRegen;
         }
     }
 }

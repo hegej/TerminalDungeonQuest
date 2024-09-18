@@ -1,5 +1,6 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Enums;
+using DungeonGameLogic.Utilities;
 
 namespace DungeonGameLogic.Characters.CharacterParameters
 {
@@ -9,19 +10,20 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 
         public RogueParameters(string name, GenderType gender)
         {
+            Random rand = RandomStatsProvider.GetRandom();
             Name = name;
             Gender = gender;
             Level = 1;
-            Health = 10;
-            Strength = 6;
-            ArmorClass = 7;
+            Health = rand.Next(70, 90);
+            Strength = rand.Next(15, 20);
+            ArmorClass = rand.Next(12, 16);
             SpecialAbility = new SpecialAbility { Name = "Stealth" };
-            Initiative = 10;
-            Speed = 22;
+            Initiative = rand.Next(16, 20);
+            Speed = rand.Next(15, 20);
             Experience = 0;
-            THAC0 = 18;
+            THAC0 = 19;
 
-            //InitializeAbilities();
+            InitializeAbilities();
         }
 
         private void InitializeAbilities()

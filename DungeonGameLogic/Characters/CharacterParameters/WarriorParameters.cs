@@ -1,5 +1,6 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Enums;
+using DungeonGameLogic.Utilities;
 
 namespace DungeonGameLogic.Characters.CharacterParameters
 {
@@ -9,15 +10,16 @@ namespace DungeonGameLogic.Characters.CharacterParameters
 
         public WarriorParameters(string name, GenderType gender)
         {
+            Random rand = RandomStatsProvider.GetRandom();
             Name = name;
-            Gender = gender;                     
+            Gender = gender;
             Level = 1;
-            Health = 12;
-            Strength = 6;
-            ArmorClass = 6;
+            Health = rand.Next(100, 120);
+            Strength = rand.Next(20, 25);
+            ArmorClass = rand.Next(15, 18);
             SpecialAbility = new SpecialAbility { Name = "PowerStrikes" };
-            Initiative = 18;
-            Speed = 12;
+            Initiative = rand.Next(10, 14);
+            Speed = rand.Next(10, 15);
             Experience = 0;
             THAC0 = 18;
 

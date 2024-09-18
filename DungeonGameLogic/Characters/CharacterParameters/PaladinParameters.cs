@@ -1,33 +1,36 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Enums;
+using DungeonGameLogic.Utilities;
 
 namespace DungeonGameLogic.Characters.CharacterParameters
 {
     public class PaladinParameters : BaseCharacterParameters
     {
-        public int Mana { get; set; } = 100;
+        public int Mana { get; set; }
         public int InitialMana { get; set; }
-        public int ManaRegen { get; set; } = 2;
+        public int ManaRegen { get; set; }
         public List<PaladinSpellPower> Spells { get; set; } = new List<PaladinSpellPower>();
         public List<PaladinSpecialAbility> SpecialAbilities { get; set; } = new List<PaladinSpecialAbility>();
 
-
         public PaladinParameters(string name, GenderType gender)
         {
+            Random rand = RandomStatsProvider.GetRandom();
             Name = name;
             Gender = gender;
             Level = 1;
-            Health = 12;
-            Strength = 6;
-            ArmorClass = 5;
-            SpecialAbility = new SpecialAbility { Name = "Power of the Gods" };
-            Initiative = 16;
-            Speed = 12;
-            Experience = 0;
-            THAC0 = 15;
-
+            Health = rand.Next(110, 130);
+            Mana = rand.Next(50, 70);
             InitialMana = Mana;
-           // InitializeSpellPower();
+            ManaRegen = rand.Next(2, 4);
+            Strength = rand.Next(18, 22);
+            ArmorClass = rand.Next(16, 19);
+            SpecialAbility = new SpecialAbility { Name = "Power of the Gods" };
+            Initiative = rand.Next(8, 12);
+            Speed = rand.Next(10, 15);
+            Experience = 0;
+            THAC0 = 17;
+
+            // InitializeSpellPower();
             //InitializeSpecialAbilities();
         }
 

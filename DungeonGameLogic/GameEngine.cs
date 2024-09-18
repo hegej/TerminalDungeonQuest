@@ -11,6 +11,8 @@ namespace DungeonGameLogic
 
         public GameEngine()
         {
+            CreateTeams();
+            BalanceTeams(_teams[0], _teams[1]);
         }
 
         public Character CreateCharacter(string type, string name, string gender, string specificType = null)
@@ -100,26 +102,53 @@ namespace DungeonGameLogic
                 team.AddMember(CreateEnemy("Enemy Rogue", EnemyType.Rogue));
                 team.AddMember(CreateEnemy("Enemy Warrior", EnemyType.Warrior));
                 team.AddMember(CreateEnemy("Enemy Paladin", EnemyType.Paladin));
+                team.AddMember(CreateEnemy("Enemy Mage", EnemyType.Mage));
             }
             else
             {
                 team.AddMember(CreateCharacter("Hunter", "Argon", "Male"));
                 team.AddMember(CreateCharacter("Mage", "FaLuna", "Female", "WhiteMage"));
                 team.AddMember(CreateCharacter("Warrior", "Jarvis", "Male"));
+                team.AddMember(CreateCharacter("Rogue", "Shadow", "Female"));
                 team.AddMember(CreateCharacter("Paladin", "Raona", "Female"));
             }
 
             return team;
         }
 
-        private void InitializeBattleEngine()
+        private void BalanceTeams(Team team1, Team team2)
         {
-            _battleEngine = new BattleEngine(_teams);
+            int team1Power = CalculateTeamPower(team1);
+            int team2Power = CalculateTeamPower(team2);
+
+            while (Math.Abs(team1Power - team2Power) > 5)
+            {
+                if (team1Power > team2Power)
+                {
+                    BuffTeam(team2);
+                    team2Power = CalculateTeamPower(team2);
+                }
+                else
+                {
+                    BuffTeam(team1);
+                    team1Power = CalculateTeamPower(team1);
+                }
+            }
         }
 
-        private void SimulateBattle()
+        private int CalculateTeamPower(Team team)
         {
-            _battleEngine.SimulateBattle(_teams);
+            return team.Members.Sum(member => member.Health + member.Strength);
         }
+
+        private void BuffTeam(Team team)
+        {
+            foreach (var member in team.Members)
+            {
+                member.Health += 1;
+                member.Strength += 1;
+            }
+        }
+
     }
 }

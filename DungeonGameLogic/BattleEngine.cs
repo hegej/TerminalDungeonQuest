@@ -1,6 +1,7 @@
 ﻿using DungeonGameLogic.Abilities;
 using DungeonGameLogic.Characters;
 using DungeonGameLogic.Enums;
+using DungeonGameLogic.Interfaces;
 
 namespace DungeonGameLogic
 {
@@ -8,30 +9,59 @@ namespace DungeonGameLogic
     {
         private List<Team> _teams;
         private Random _random = new Random();
-        private List<string> _battleLog = new List<string>();
+        private SimulationSpeed _speed;
+        private IBattleLogger _logger;
 
-        public BattleEngine(List<Team> teams)
+        public BattleEngine(List<Team> teams, SimulationSpeed speed, IBattleLogger logger)
         {
             if (teams.Count < 2)
             {
                 throw new ArgumentException("Battle requires at least two teams.");
             }
 
-           _teams = teams;
+            _teams = teams;
+            _speed = speed;
+            _logger = logger;
         }
 
-        public void SimulateBattle(List<Team> teams)
+        public void SimulateBattle()
         {
+            _logger.LogBattleStart();
+
+            foreach (var team in _teams)
+            {
+                foreach (var character in team.Members)
+                {
+                    _logger.DisplayCharacterStats(character);
+                }
+            }
+
+            _logger.LogAction("Displaying character stats. Battle will begin in 1 second...", LogType.Normal, "");
+            Thread.Sleep(1000);
+
             var round = 1;
             while (_teams.Count(t => t.AliveMembers()) > 1)
             {
-                BattleLogger.LogBattleRoundStart(round);
+                _logger.LogAction($"Round {round} begins", LogType.Normal, "");
                 ExecuteRound();
                 round++;
+
+                switch (_speed)
+                {
+                    case SimulationSpeed.Fast:
+                        Thread.Sleep(100);
+                        break;
+                    case SimulationSpeed.Slow:
+                        Thread.Sleep(1000);
+                        break;
+                    case SimulationSpeed.Manual:
+                        Console.WriteLine("Press Enter...");
+                        Console.ReadLine();
+                        break;
+                }
             }
             LogBattleEnd();
         }
-
 
         private Character ChooseRandomTarget(List<Team> teams)
         {
@@ -72,7 +102,7 @@ namespace DungeonGameLogic
             }
 
             RegenerateMana();
-            _battleLog.Add("Round completed.");
+            _logger.LogAction("Round completed.", LogType.Normal, "");
         }
 
         private void Attack(Character attacker, Character target)
@@ -80,7 +110,8 @@ namespace DungeonGameLogic
             var attackRoll = _random.Next(1, 21);
             var requiredRollToHit = attacker.THAC0 - target.ArmorClass;
 
-            BattleLogger.Log($"{attacker.Name} needs to roll {requiredRollToHit} or higher to hit.\n Rolls: {attackRoll}");
+            _logger.LogAction($"{attacker.Name} needs to roll {requiredRollToHit} or higher to hit. Rolls: {attackRoll}",
+            attacker.Team == _teams[0].Name ? LogType.Enemy : LogType.Friendly, "Attack");
 
             if (attackRoll >= requiredRollToHit)
             {
@@ -89,17 +120,19 @@ namespace DungeonGameLogic
                 var previousHealth = target.Health;
                 target.Health = Math.Max(0, target.Health - damage);
 
-                BattleLogger.LogAction($"{attacker.Name} Hits {target.Name} for {damage} damage.\n {target.Name} has {target.Health} health remaining.");
+                _logger.LogAction($"{attacker.Name} Hits {target.Name} for {damage} damage. {target.Name} has {target.Health} health remaining.",
+                attacker.Team == _teams[0].Name ? LogType.Enemy : LogType.Friendly, "Attack");
 
                 if (target.Health <= 0)
                 {
                     target.IsAlive = false;
-                    BattleLogger.Log($"{target.Name} is defeated!");
+                    _logger.LogAction($"{target.Name} is defeated!", LogType.Critical, "Death");
                 }
             }
             else
             {
-                BattleLogger.LogAction($"{attacker.Name} tries to attack {target.Name} bus missed!");
+                _logger.LogAction($"{attacker.Name} tries to attack {target.Name} but missed!",
+                attacker.Team == _teams[0].Name ? LogType.Enemy : LogType.Friendly, "Attack");
             }
         }
 
@@ -131,12 +164,10 @@ namespace DungeonGameLogic
             {
                 mana = playerMage.Mana;
             }
-
             else if (caster is Enemy enemyMage && enemyMage.EnemyType == EnemyType.Mage)
             {
                 mana = enemyMage.enemyParameters.Mana;
             }
-
             else
             {
                 Attack(caster, target);
@@ -161,7 +192,8 @@ namespace DungeonGameLogic
             var roll = _random.Next(1, 21);
             var requiredRoll = caster.THAC0 - target.ArmorClass;
 
-            BattleLogger.Log($"{caster.Name} tries to cast {spell.SpellName}. Need to roll {requiredRoll} or higher to hit.\n Rolls: {roll}");
+            _logger.LogAction($"{caster.Name} tries to cast {spell.SpellName}. Need to roll {requiredRoll} or higher to hit. Rolls: {roll}",
+            caster.Team == _teams[0].Name ? LogType.Enemy : LogType.Friendly, "Spell");
 
             if (roll >= requiredRoll)
             {
@@ -171,30 +203,32 @@ namespace DungeonGameLogic
                     var oldHealth = target.Health;
                     target.Health = Math.Min(target.MaxHealth, target.Health + healAmount);
                     var actualHeal = target.Health - oldHealth;
-                    BattleLogger.LogAction($"{caster.Name} Cast {spell.SpellName} on {target.Name}, healing for {actualHeal}.\n {target.Name} now has {target.Health}/{target.MaxHealth} health.");
+                    _logger.LogAction($"{caster.Name} Cast {spell.SpellName} on {target.Name}, healing for {actualHeal}. {target.Name} now has {target.Health}/{target.MaxHealth} health.",
+                    LogType.Healing, "Heal");
                 }
                 else
                 {
                     var damage = spell.EffectValue;
                     target.Health = Math.Max(0, target.Health - damage);
-                    BattleLogger.LogAction($"{caster.Name} cast {spell.SpellName} on {target.Name} dealing {damage} damage.\n {target.Name} now has {target.Health}/{target.MaxHealth} health remaining.");
-
+                    _logger.LogAction($"{caster.Name} cast {spell.SpellName} on {target.Name} dealing {damage} damage. {target.Name} now has {target.Health}/{target.MaxHealth} health remaining.",
+                    caster.Team == _teams[0].Name ? LogType.Enemy : LogType.Friendly, "Spell");
                 }
 
                 if (target.Health <= 0)
                 {
                     target.IsAlive = false;
-                    BattleLogger.Log($"{target.Name} has been defeated!");
+                    _logger.LogAction($"{target.Name} has been defeated!", LogType.Critical, "Death");
                 }
             }
             else
             {
-                BattleLogger.LogAction($"{caster.Name} tried to cast {spell.SpellName} on {target.Name} but missed!");
+                _logger.LogAction($"{caster.Name} tried to cast {spell.SpellName} on {target.Name} but missed!",
+                caster.Team == _teams[0].Name ? LogType.Enemy : LogType.Friendly, "Spell");
             }
 
             var remainingMana = (caster is Mage mageCaster) ? mageCaster.Mana :
                                 (caster is Enemy enemy && enemy.EnemyType == EnemyType.Mage) ? enemy.enemyParameters.Mana : 0;
-            BattleLogger.Log($"{caster.Name} has {remainingMana} mana remaining.");
+            _logger.LogAction($"{caster.Name} has {remainingMana} mana remaining.", LogType.Normal, "");
         }
 
         private void RegenerateMana()
@@ -203,15 +237,17 @@ namespace DungeonGameLogic
             {
                 foreach (var character in team.Members)
                 {
+                    if (!character.IsAlive) continue;
+
                     if (character is Mage mage)
                     {
                         mage.Mana = Math.Min(mage.Mana + mage.ManaRegen, mage.InitialMana);
-                        BattleLogger.Log($"{mage.Name} Regenerated {mage.ManaRegen} mana. Current mana: {mage.Mana}");
+                        _logger.LogAction($"{mage.Name} Regenerated {mage.ManaRegen} mana. Current mana: {mage.Mana}", LogType.Normal, "ManaRegen");
                     }
                     else if (character is Enemy enemy && enemy.EnemyType == EnemyType.Mage)
                     {
                         enemy.enemyParameters.Mana = Math.Min(enemy.enemyParameters.Mana + enemy.enemyParameters.ManaRegen, enemy.enemyParameters.InitialMana);
-                        BattleLogger.Log($"{enemy.Name} Regenerated {enemy.enemyParameters.ManaRegen} mana. Current mana: {enemy.enemyParameters.Mana}");
+                        _logger.LogAction($"{enemy.Name} Regenerated {enemy.enemyParameters.ManaRegen} mana. Current mana: {enemy.enemyParameters.Mana}", LogType.Normal, "ManaRegen");
                     }
                 }
             }
@@ -220,8 +256,7 @@ namespace DungeonGameLogic
         private void LogBattleEnd()
         {
             var winningTeam = _teams.FirstOrDefault(t => t.AliveMembers());
-            BattleLogger.LogBattleOutcome($"Battle has ended! {winningTeam?.Name} is the winner!");
+            _logger.LogBattleEnd(winningTeam?.Name ?? "No winner (Draw)");
         }
     }
 }
-
